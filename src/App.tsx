@@ -1,8 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import DefaultLayout from './layout/DefaultLayout';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
+import useToken from './hooks/useToken';
 
 // Lazy load các trang để tối ưu hiệu suất
 const SignIn = lazy(() => import('./pages/Authentication/SignIn'));
@@ -17,11 +18,12 @@ const Settings = lazy(() => import('./pages/Settings'));
 const Tables = lazy(() => import('./pages/Tables'));
 const Alerts = lazy(() => import('./pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('./pages/UiElements/Buttons'));
-const UserTest = lazy(() => import('./pages/UserTest'))
-const Test = lazy(() => import('./pages/Test'))
+// const UserTest = lazy(() => import('./pages/UserTest'))
+// const Test = lazy(() => import('./pages/Test'))
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const { token, setToken } = useToken();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -34,15 +36,18 @@ function App() {
 
   if (loading) return <Loader />;
 
+  // if(!token) {
+  //   return <SignIn setToken={setToken}/>
+  // }
+
   return (
     <DefaultLayout>
       <Suspense fallback={<Loader />}>
         <Routes>
-        <Route path="/" element={<Navigate to="/auth/signin" />} />
           {/* Trang SignIn */}
           <Route
             path="/auth/signin"
-            element={<PageWithTitle title="Signin | TailAdmin" component={<SignIn />} />}
+            element={<PageWithTitle title="Signin | TailAdmin" component={<SignIn setToken={setToken}/>} />}
           />
 
           {/* Các trang khác */}
@@ -58,14 +63,14 @@ function App() {
             path="/profile"
             element={<PageWithTitle title="Profile | TailAdmin" component={<Profile />} />}
           />
-          <Route
+          {/* <Route
             path="/userTest"
             element={<PageWithTitle title="UserTest | TailAdmin" component={<UserTest />} />}
-          />
-           <Route
+          /> */}
+           {/* <Route
             path="/test"
             element={<PageWithTitle title="UserTest | TailAdmin" component={<Test />} />}
-          />
+          /> */}
           <Route
             path="/forms/form-elements"
             element={<PageWithTitle title="Form Elements | TailAdmin" component={<FormElements />} />}

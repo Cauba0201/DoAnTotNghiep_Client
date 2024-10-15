@@ -1,30 +1,46 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-// import LogoDark from '../../images/logo/logo-dark.svg';
-// import Logo from '../../images/logo/logo.svg';
 import logoSignIn from '../../images/logo/logo_viettel.svg';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+async function loginUser(credentials: { email: string; password: string }) {
+  return fetch('http://localhost:3000/admin/login', {  // Updated to match the backend route
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error('Login failed'); // Error handling
+    }
+    return response.json();
+  });
+}
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC<{ setToken: (token: string) => void }> = ({
+  setToken,
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (email === 'test@example.com' && password === 'password123') {
-      navigate('/');
-    } else {
-      setError('Invalid email or password');
+    try {
+      const token = await loginUser({ email, password });
+      setToken(token);
+      localStorage.setItem('token', token); // Save token in local storage
+      navigate('/'); // Redirect to home page
+    } catch (err: any) {
+      setError(err.message); // Display error message
     }
-    }
+  };
+
   return (
     <>
-      <Breadcrumb pageName="Sign In" />
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -42,17 +58,18 @@ const SignIn: React.FC = () => {
                 Viettel Quality Test
               </h2>
 
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSubmit}>
+                {error && <p className="text-red-500">{error}</p>}
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Email
+                    Email {'test@example.com'}
                   </label>
                   <div className="relative">
                     <input
-                       type="email"
-                       value={email}
-                       onChange={(e) => setEmail(e.target.value)}
-                       required
+                      // type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       placeholder="test@example.com"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
@@ -79,15 +96,15 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Password
+                    Password {'password123'}
                   </label>
                   <div className="relative">
                     <input
-                       type="password"
-                       value={password}
-                       onChange={(e) => setPassword(e.target.value)}
-                       required
-                      placeholder="password123"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="Password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
 
@@ -115,7 +132,6 @@ const SignIn: React.FC = () => {
                   </div>
                 </div>
 
-                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="mb-5">
                   <input
                     type="submit"
@@ -167,6 +183,10 @@ const SignIn: React.FC = () => {
       </div>
     </>
   );
+};
+
+SignIn.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 export default SignIn;
