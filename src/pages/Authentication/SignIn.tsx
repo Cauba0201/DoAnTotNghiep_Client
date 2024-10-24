@@ -1,72 +1,79 @@
 import React, { useState } from 'react';
-import logoSignIn from '../../images/logo/logo_viettel.svg';
-import { useNavigate } from 'react-router-dom';
+import logoSignInLightMode from '../../images/Light Mode.png';
+// import logoSignInDarkMode from '../../images/Dark Mode.png';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-async function loginUser(credentials: { email: string; password: string }) {
-  return fetch('http://localhost:3000/admin/login', {  // Updated to match the backend route
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error('Login failed'); // Error handling
-    }
-    return response.json();
-  });
-}
+// async function loginUser(credentials: { email: string; password: string }) {
+//   return fetch('http://localhost:3000/admin/login', {
+//     // Updated to match the backend route
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(credentials),
+//   }).then((response) => {
+//     if (!response.ok) {
+//       throw new Error('Login failed'); // Error handling
+//     }
+//     return response.json();
+//   });
+// }
 
-const SignIn: React.FC<{ setToken: (token: string) => void }> = ({
-  setToken,
-}) => {
+const SignIn: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const token = await loginUser({ email, password });
-      setToken(token);
-      localStorage.setItem('token', token); // Save token in local storage
-      navigate('/'); // Redirect to home page
-    } catch (err: any) {
-      setError(err.message); // Display error message
-    }
+    // try {
+    //   const token = await loginUser({ email, password });
+    //   setToken(token);
+    //   localStorage.setItem('token', token); // Save token in local storage
+    //   navigate('/'); // Redirect to home page
+    // } catch (err: any) {
+    //   setError(err.message); // Display error message
+    // }
+  };
+
+  const handleRegisterClick = () => {
+    navigate('/auth/signup');
   };
 
   return (
     <>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="flex flex-wrap items-center">
+      <div className="rounded-sm border border-stroke m-15  bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="flex flex-wrap justify-center h-[90vh] items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 w-full h-[100%] text-center">
               <span className="mt-15 inline-block">
-                <img src={logoSignIn} alt="logoSignIn" />
+                <img src={logoSignInLightMode} alt="logoSignIn" />
               </span>
             </div>
           </div>
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">Sign In</span>
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Viettel Quality Test
-              </h2>
+              <span className="mb-1.5 block font-bold text-2xl text-black dark:text-white sm:text-title-xl2">
+                Login
+              </span>
 
-              <form onSubmit={handleSubmit}>
-                {error && <p className="text-red-500">{error}</p>}
+              {/* <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+                Monitor International Connection Quality
+              </h2> */}
+
+              <form onSubmit={handleSubmit} method="POST">
+                {/* {error && <p className="text-red-500">{error}</p>} */}
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Email {'test@example.com'}
-                  </label>
+                  {/* <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  test@example.com {'test@example.com'}
+                  </label> */}
                   <div className="relative">
                     <input
-                      // type="email"
+                      type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -95,9 +102,9 @@ const SignIn: React.FC<{ setToken: (token: string) => void }> = ({
                 </div>
 
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  {/* <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Password {'password123'}
-                  </label>
+                  </label> */}
                   <div className="relative">
                     <input
                       type="password"
@@ -135,7 +142,7 @@ const SignIn: React.FC<{ setToken: (token: string) => void }> = ({
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value="Sign In"
+                    value="Login"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>
@@ -176,6 +183,23 @@ const SignIn: React.FC<{ setToken: (token: string) => void }> = ({
                   </span>
                   Sign in with Google
                 </button>
+                <div className="flex items-center mt-4 justify-between pb-6">
+                  <p className="mb-0 mr-2">Don't have an account?</p>
+                  {/* <button
+                    type="button"
+                    onClick={handleRegisterClick}
+                    className="inline-block rounded  px-6 pb-[6px] pt-2 text-xs font-medium leading-normal text-primary transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  >
+                    Register
+                  </button> */}
+                  <Link
+                    to="/auth/signup"
+                    className="text-primary"
+                    onClick={handleRegisterClick}
+                  >
+                    Register
+                  </Link>
+                </div>
               </form>
             </div>
           </div>

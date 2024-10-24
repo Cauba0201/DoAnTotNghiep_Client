@@ -3,7 +3,8 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import DefaultLayout from './layout/DefaultLayout';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
-import useToken from './hooks/useToken';
+// import GlobalPing from './pages/GlobalePing';
+// import useToken from './hooks/useToken';
 
 // Lazy load các trang để tối ưu hiệu suất
 const SignIn = lazy(() => import('./pages/Authentication/SignIn'));
@@ -18,12 +19,11 @@ const Settings = lazy(() => import('./pages/Settings'));
 const Tables = lazy(() => import('./pages/Tables'));
 const Alerts = lazy(() => import('./pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('./pages/UiElements/Buttons'));
-// const UserTest = lazy(() => import('./pages/UserTest'))
-// const Test = lazy(() => import('./pages/Test'))
+const GlobalePing =lazy(() => import('./pages/GlobalePing'))
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
-  const { token, setToken } = useToken();
+  // const { token, setToken } = useToken();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -47,61 +47,57 @@ function App() {
           {/* Trang SignIn */}
           <Route
             path="/auth/signin"
-            element={<PageWithTitle title="Signin | TailAdmin" component={<SignIn setToken={setToken}/>} />}
+            element={<PageWithTitle title="Signin | Monitor International Connection Quality" component={<SignIn />} />}
           />
 
           {/* Các trang khác */}
           <Route
             path="/"
-            element={<PageWithTitle title="eCommerce Dashboard | TailAdmin" component={<ECommerce />} />}
+            element={<PageWithTitle title="Dashboard | Monitor International Connection Quality" component={<ECommerce />} />}
           />
           <Route
             path="/calendar"
-            element={<PageWithTitle title="Calendar | TailAdmin" component={<Calendar />} />}
+            element={<PageWithTitle title="Calendar | Monitor International Connection Quality" component={<Calendar />} />}
           />
           <Route
             path="/profile"
-            element={<PageWithTitle title="Profile | TailAdmin" component={<Profile />} />}
+            element={<PageWithTitle title="Profile | Monitor International Connection Quality" component={<Profile />} />}
           />
-          {/* <Route
-            path="/userTest"
-            element={<PageWithTitle title="UserTest | TailAdmin" component={<UserTest />} />}
-          /> */}
-           {/* <Route
-            path="/test"
-            element={<PageWithTitle title="UserTest | TailAdmin" component={<Test />} />}
-          /> */}
+          <Route
+            path="/ping"
+            element={<PageWithTitle title="Global Ping | Monitor International Connection Quality" component={<GlobalePing />} />}
+          />
           <Route
             path="/forms/form-elements"
-            element={<PageWithTitle title="Form Elements | TailAdmin" component={<FormElements />} />}
+            element={<PageWithTitle title="Form Elements | Monitor International Connection Quality" component={<FormElements />} />}
           />
           <Route
             path="/forms/form-layout"
-            element={<PageWithTitle title="Form Layout | TailAdmin" component={<FormLayout />} />}
+            element={<PageWithTitle title="Form Layout | Monitor International Connection Quality" component={<FormLayout />} />}
           />
           <Route
             path="/tables"
-            element={<PageWithTitle title="Tables | TailAdmin" component={<Tables />} />}
+            element={<PageWithTitle title="Tables | Monitor International Connection Quality" component={<Tables />} />}
           />
           <Route
             path="/settings"
-            element={<PageWithTitle title="Settings | TailAdmin" component={<Settings />} />}
+            element={<PageWithTitle title="Settings | Monitor International Connection Quality" component={<Settings />} />}
           />
           <Route
             path="/chart"
-            element={<PageWithTitle title="Basic Chart | TailAdmin" component={<Chart />} />}
+            element={<PageWithTitle title="Basic Chart | Monitor International Connection Quality" component={<Chart />} />}
           />
           <Route
             path="/ui/alerts"
-            element={<PageWithTitle title="Alerts | TailAdmin" component={<Alerts />} />}
+            element={<PageWithTitle title="Alerts | Monitor International Connection Quality" component={<Alerts />} />}
           />
           <Route
             path="/ui/buttons"
-            element={<PageWithTitle title="Buttons | TailAdmin" component={<Buttons />} />}
+            element={<PageWithTitle title="Buttons | Monitor International Connection Quality" component={<Buttons />} />}
           />
           <Route
             path="/auth/signup"
-            element={<PageWithTitle title="Signup | TailAdmin" component={<SignUp />} />}
+            element={<PageWithTitle title="Signup | Monitor International Connection Quality" component={<SignUp />} />}
           />
         </Routes>
       </Suspense>

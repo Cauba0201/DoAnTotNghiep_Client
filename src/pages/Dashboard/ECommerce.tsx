@@ -3,9 +3,9 @@ import CardDataStats from '../../components/CardDataStats';
 import ChartOne from '../../components/Charts/ChartOne';
 import ChartThree from '../../components/Charts/ChartThree';
 import ChartTwo from '../../components/Charts/ChartTwo';
-import ChatCard from '../../components/Chat/ChatCard';
-import MapOne from '../../components/Maps/MapOne';
-import GeoChart from '../../components/Maps/GeoChart'
+// import ChatCard from '../../components/Chat/ChatCard';
+// import MapOne from '../../components/Maps/MapOne';
+import GeoChart from '../../components/Maps/GeoChart';
 import TableOne from '../../components/Tables/TableOne';
 
 const ECommerce: React.FC = () => {
@@ -51,7 +51,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Latency (Avg)" total="45 MB" rate="2.59%" levelUp>
+        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp>
           <svg
             fill="#000000"
             version="1.1"
@@ -69,7 +69,7 @@ const ECommerce: React.FC = () => {
             <path d="M8.6,11.4c-0.8-0.8-2.8-5.7-2.8-5.7s4.9,2,5.7,2.8c0.8,0.8,0.8,2,0,2.8C10.6,12.2,9.4,12.2,8.6,11.4z" />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Timestamp" total="12:30" rate="0.95%" levelDown>
+        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown>
           <svg
             width="800px"
             height="800px"
@@ -78,7 +78,7 @@ const ECommerce: React.FC = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M12 7V12L9.5 10.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+              d="M16 20.2476L20.2374 16M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H11.5M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V11M9 17H11.5M9 13H13M9 9H10M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"
               stroke="#000000"
               stroke-width="2"
               stroke-linecap="round"
@@ -92,12 +92,10 @@ const ECommerce: React.FC = () => {
         <ChartOne />
         <ChartTwo />
         <ChartThree />
-        {/* <MapOne /> */}
-        <GeoChart/>
-        <div className="col-span-12 xl:col-span-8">
+        <GeoChart />
+        <div className="col-span-12 ">
           <TableOne />
         </div>
-        <ChatCard />
       </div>
     </>
   );

@@ -1,47 +1,47 @@
 import { BRAND } from '../../types/brand';
-import BrandOne from '../../images/brand/brand-01.svg';
-import BrandTwo from '../../images/brand/brand-02.svg';
-import BrandThree from '../../images/brand/brand-03.svg';
-import BrandFour from '../../images/brand/brand-04.svg';
-import BrandFive from '../../images/brand/brand-05.svg';
+import BrandOne from '../../images/flags/SG.svg';
+import BrandTwo from '../../images/flags/HK.svg';
+import BrandThree from '../../images/flags/TW.svg';
+import BrandFour from '../../images/flags/GB-ENG.svg';
+import BrandFive from '../../images/flags/US.svg';
 
 const brandData: BRAND[] = [
   {
     logo: BrandOne,
-    name: 'Google',
-    visitors: 3.5,
+    name: 'Singapore',
+    ip: '142.126.97.26',
     revenues: '5,768',
     sales: 590,
     conversion: 4.8,
   },
   {
     logo: BrandTwo,
-    name: 'Twitter',
-    visitors: 2.2,
+    name: 'Hongkong',
+    ip: '142.126.97.26',
     revenues: '4,635',
     sales: 467,
     conversion: 4.3,
   },
   {
     logo: BrandThree,
-    name: 'Github',
-    visitors: 2.1,
+    name: 'Taiwan',
+    ip: '142.126.97.26',
     revenues: '4,290',
     sales: 420,
     conversion: 3.7,
   },
   {
     logo: BrandFour,
-    name: 'Vimeo',
-    visitors: 1.5,
+    name: 'UK',
+    ip: '142.126.97.26',
     revenues: '3,580',
     sales: 389,
     conversion: 2.5,
   },
   {
     logo: BrandFive,
-    name: 'Facebook',
-    visitors: 3.5,
+    name: 'US',
+    ip: '142.126.97.26',
     revenues: '6,768',
     sales: 390,
     conversion: 4.2,
@@ -59,27 +59,23 @@ const TableOne = () => {
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Source
+              Location
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
+              IP/Host
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
-            </h5>
+            <h5 className="text-sm font-medium uppercase xsm:text-base">LTC</h5>
+          </div>
+          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">PKL</h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
+              SENT
             </h5>
           </div>
         </div>
@@ -103,7 +99,7 @@ const TableOne = () => {
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
+              <p className="text-black dark:text-white">{brand.ip}</p>
             </div>
 
             <div className="flex items-center justify-center p-2.5 xl:p-5">

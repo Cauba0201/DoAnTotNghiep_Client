@@ -1,7 +1,7 @@
 export type BRAND = {
   logo: string;
   name: string;
-  visitors: number;
+  ip: string;
   revenues: string;
   sales: number;
   conversion: number;
