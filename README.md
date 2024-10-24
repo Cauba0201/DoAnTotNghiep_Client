@@ -1,38 +1,82 @@
-# TailAdmin React - Free React Tailwind Admin Dashboard Template
+# ĐỒ ÁN TỐT NGHIỆP - MONITOR INTERNATIONAL CONNECTION QUALITY
 
-TailAdmin is a free and open-source admin dashboard template built on **React and Tailwind CSS**, providing developers with everything they need to create a comprehensive, data-driven back-end, 
-dashboard, or admin panel solution for upcoming web projects.
+Giới thiệu đồ án 
 
-[![tailwind react admin template](https://ucarecdn.com/d2a6daed-eb9c-4c2f-8a95-4419c450e23a/tailadminreact.jpg)](https://react-demo.tailadmin.com/)
-
-
-With TailAdmin, you get access to all the necessary dashboard UI components, elements, and pages required to build a feature-rich and complete dashboard or admin panel. Whether you're building dashboard or admin panel for a complex web application or a simple website, TailAdmin is the perfect solution to help you get up and running quickly.
 
 ### [✨ Visit Website](https://tailadmin.com/)
 
 ### [🚀 PRO Demo](https://react-demo.tailadmin.com/)
 ### [🚀 FREE Demo](https://free-react-demo.tailadmin.com/)
 
-### TailAdmin React PRO vs TailAdmin React FREE Comparison 📊
+### CẤU TRÚC TRONG SOURCE CODE 📊
 
 #### [TailAdmin React PRO](https://react-demo.tailadmin.com/)
-- 5 Unique Dashboards: Analytics, Ecommerce, Marketing, and CRM (More will be added)
-- 120+ Dashboard UI Components
-- 200+ Total UI Elements
-- 45+ HTML Files
-- All Essential Elements and Files
-- Full Figma Design Source - As Shown on Demo
+src/
+├── components/
+│   ├── atoms/          # Smallest building blocks (e.g., buttons, inputs)
+│   │   ├── Button/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Button.test.tsx
+│   │   │   ├── Button.module.css (if using CSS Modules)
+│   │   │   └── index.ts
+│   │   └── Input/
+│   │       ├── Input.tsx
+│   │       └── index.ts
+│   │
+│   ├── molecules/      # Composed from atoms (e.g., form groups)
+│   │   ├── InputGroup/
+│   │   │   ├── InputGroup.tsx
+│   │   │   ├── InputGroup.test.tsx
+│   │   │   ├── InputGroup.module.css
+│   │   │   └── index.ts
+│   │   └── Navbar/
+│   │       ├── Navbar.tsx
+│   │       └── index.ts
+│   │
+│   ├── organisms/      # Composed from atoms & molecules (e.g., headers)
+│   │   └── Header/
+│   │       ├── Header.tsx
+│   │       ├── Header.test.tsx
+│   │       └── index.ts
+│   │
+│   └── templates/      # Page-level layouts
+│       └── MainLayout/
+│           ├── MainLayout.tsx
+│           └── index.ts
+│
+├── pages/              # Next.js pages (route handlers)
+│   ├── index.tsx
+│   ├── about.tsx
+│   └── products/
+│       └── [id].tsx
+│
+├── hooks/              # Custom React hooks
+│   └── useFetch.ts
+│
+├── contexts/           # Context API providers
+│   └── AuthContext.tsx
+│
+├── styles/             # Global styles
+│   ├── globals.css
+│   └── theme.ts
+│
+├── utils/              # Helper functions
+│   └── formatDate.ts
+│
+├── public/ 
+│
+└── next.config.js      # Next.js configuration
 
 ___
 
-#### [TailAdmin React FREE](https://free-react-demo.tailadmin.com/)
-- 1 Unique Dashboard
-- 30+ Dashboard UI Components
-- 50+ Total UI Elements 
-- 10+ HTML Files
-- TypeScript Support
-- Basic UI Kit Elements and Files
-- Figma Design Source - Free Sample
+#### [Công Nghệ Được Sử Dụng Trong Dự Án]
+- HTML & CSS && Javascript
+- ReactJs
+- TypeScript
+- TailwinCSS
+- NPM Manager 
+- NPM React MapView - Google
+- ViteJs
 ___
 
 ### [⬇️ Download Now](https://tailadmin.com/download)
