@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import logoVT from "../images/imgISP/Logo-Tap-doan-vien-thong-Viettel-Moi-02-01-1024x640.svg"
 
 interface CardDataStatsProps {
   title: string;
@@ -8,6 +7,8 @@ interface CardDataStatsProps {
   levelUp?: boolean;
   levelDown?: boolean;
   children: ReactNode;
+  isp: boolean;
+  img: string
 }
 
 const CardDataStats: React.FC<CardDataStatsProps> = ({
@@ -17,11 +18,17 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
   levelUp,
   levelDown,
   children,
+  isp,
+  img
 }) => {
   return (
     <div className="rounded-sm border border-stroke bg-[white] py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
         {children}
+        {isp && <span className="absolute ml-[400px]">
+          <img src={img} alt="logoVT" className="h-15 w-20" />
+        </span>}
+        
       </div>
 
       <div className="mt-4 flex items-end justify-between">

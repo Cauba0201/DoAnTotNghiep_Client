@@ -7,13 +7,16 @@ import ChartTwo from '../../components/Charts/ChartTwo';
 // import MapOne from '../../components/Maps/MapOne';
 import GeoChart from '../../components/Maps/GeoChart';
 import TableOne from '../../components/Tables/TableOne';
+import logoViettel from '../../images/imgISP/Logo-Tap-doan-vien-thong-Viettel-Moi-02-01-1024x640.jpg';
+import logoFPT from '../../images/imgISP/y-nghia-logo-fpt-lan-3.jpg'
+import logoVNPT from '../../images/imgISP/logo-vnpt-inkythuatso-01-01-14-56-59.jpg'
 
 const ECommerce: React.FC = () => {
   return (
     <>
-    {/* VIETTEL */}
+      {/* VIETTEL */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp>
+        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp isp img={logoViettel}>
           <svg
             width="800px"
             height="800px"
@@ -35,7 +38,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="ISP" total="Viettel" rate="4.35%" levelUp>
+        <CardDataStats title="ISP" total="Viettel" rate="4.35%" levelUp isp img={logoViettel}>
           <svg
             version="1.0"
             id="Layer_1"
@@ -51,8 +54,9 @@ const ECommerce: React.FC = () => {
 	            C60,1.789,58.211,0,56,0z M28,40h-8v-8h8V40z M28,24h-8v-8h8V24z M44,40h-8v-8h8V40z M44,24h-8v-8h8V24z"
             />
           </svg>
+          {/* <img src={logoViettel} alt="logoVT" className="h-15 w-20" /> */}
         </CardDataStats>
-        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp>
+        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp isp img={logoViettel}>
           <svg
             fill="#000000"
             version="1.1"
@@ -70,7 +74,7 @@ const ECommerce: React.FC = () => {
             <path d="M8.6,11.4c-0.8-0.8-2.8-5.7-2.8-5.7s4.9,2,5.7,2.8c0.8,0.8,0.8,2,0,2.8C10.6,12.2,9.4,12.2,8.6,11.4z" />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown>
+        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown isp img={logoViettel}>
           <svg
             width="800px"
             height="800px"
@@ -90,7 +94,7 @@ const ECommerce: React.FC = () => {
       </div>
       {/* VNPT */}
       <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp>
+        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp isp img={logoVNPT}>
           <svg
             width="800px"
             height="800px"
@@ -112,7 +116,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="ISP" total="VNPT" rate="4.35%" levelUp>
+        <CardDataStats title="ISP" total="VNPT" rate="4.35%" levelUp isp img={logoVNPT}>
           <svg
             version="1.0"
             id="Layer_1"
@@ -129,7 +133,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp>
+        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp isp img={logoVNPT}>
           <svg
             fill="#000000"
             version="1.1"
@@ -147,7 +151,7 @@ const ECommerce: React.FC = () => {
             <path d="M8.6,11.4c-0.8-0.8-2.8-5.7-2.8-5.7s4.9,2,5.7,2.8c0.8,0.8,0.8,2,0,2.8C10.6,12.2,9.4,12.2,8.6,11.4z" />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown>
+        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown isp img={logoVNPT}>
           <svg
             width="800px"
             height="800px"
@@ -167,7 +171,7 @@ const ECommerce: React.FC = () => {
       </div>
       {/* FPT */}
       <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp>
+        <CardDataStats title="Country" total="Singapore" rate="0.43%" levelUp isp img={logoFPT}>
           <svg
             width="800px"
             height="800px"
@@ -189,7 +193,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="ISP" total="FPT" rate="4.35%" levelUp>
+        <CardDataStats title="ISP" total="FPT" rate="4.35%" levelUp isp img={logoFPT}>
           <svg
             version="1.0"
             id="Layer_1"
@@ -206,7 +210,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp>
+        <CardDataStats title="Latency (Avg)" total="45 MS" rate="2.59%" levelUp isp img={logoFPT}>
           <svg
             fill="#000000"
             version="1.1"
@@ -224,7 +228,7 @@ const ECommerce: React.FC = () => {
             <path d="M8.6,11.4c-0.8-0.8-2.8-5.7-2.8-5.7s4.9,2,5.7,2.8c0.8,0.8,0.8,2,0,2.8C10.6,12.2,9.4,12.2,8.6,11.4z" />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown>
+        <CardDataStats title="Packet Loss" total="20%" rate="0.95%" levelDown isp img={logoFPT}>
           <svg
             width="800px"
             height="800px"
@@ -243,7 +247,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+      <div className="mt-4 grid-rows-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />
         <ChartTwo />
         <ChartThree />

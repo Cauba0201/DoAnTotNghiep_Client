@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Profile = () => {
   return (
     <>
-      <Breadcrumb pageName="Profile" />
+      <Breadcrumb pageName="About Me" />
 
       <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="relative z-20 h-35 md:h-65">
@@ -88,9 +88,9 @@ const Profile = () => {
           </div>
           <div className="mt-4">
             <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
-              Danish Heilium
+              Nguyen Van An
             </h3>
-            <p className="font-medium">Ui/Ux Designer</p>
+            <p className="font-medium">Author</p>
             <div className="mx-auto mt-4.5 mb-5.5 grid max-w-94 grid-cols-3 rounded-md border border-stroke py-2.5 shadow-1 dark:border-strokedark dark:bg-[#37404F]">
               <div className="flex flex-col items-center justify-center gap-1 border-r border-stroke px-4 dark:border-strokedark xsm:flex-row">
                 <span className="font-semibold text-black dark:text-white">
@@ -117,11 +117,11 @@ const Profile = () => {
                 About Me
               </h4>
               <p className="mt-4.5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque posuere fermentum urna, eu condimentum mauris
-                tempus ut. Donec fermentum blandit aliquet. Etiam dictum dapibus
-                ultricies. Sed vel aliquet libero. Nunc a augue fermentum,
-                pharetra ligula sed, aliquam lacus.
+                The International Connection Quality Monitoring System is a
+                system that monitors the connection quality of networks to many
+                countries around the world. This helps service providers or
+                people have an intuitive view of the connection quality and
+                network quality of service providers.
               </p>
             </div>
 

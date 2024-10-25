@@ -1,17 +1,17 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 interface ChartThreeState {
   series: number[];
+  colors: string[];
 }
 
-const options: ApexOptions = {
+const defaultOptions: ApexOptions = {
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     type: 'donut',
   },
-  colors: ['#3C50E0', '#6577F3', '#8FD0EF', '#0FADCF'],
   labels: ['Game', 'Video', 'News Website', 'VoiceIP'],
   legend: {
     show: false,
@@ -50,26 +50,50 @@ const options: ApexOptions = {
 
 const ChartThree: React.FC = () => {
   const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56], // Dữ liệu mặc định ban đầu cho biểu đồ
+    series: [70, 30, 15, 45],
+    colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'], // Màu mặc định
   });
+
+  useEffect(() => {
+    // Cập nhật các màu trong biểu đồ dựa trên state.colors
+    options.colors = state.colors;
+  }, [state.colors]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
 
-    // Cập nhật dữ liệu dựa trên giá trị đã chọn
+    // Cập nhật dữ liệu và màu sắc dựa trên nhà mạng đã chọn
     switch (value) {
       case 'Viettel':
-        setState({ series: [70, 30, 15, 45] });
+        setState({
+          series: [70, 30, 15, 45],
+          colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'], // Màu sắc của Viettel
+        });
         break;
       case 'VNPT':
-        setState({ series: [60, 40, 20, 50] });
+        setState({
+          series: [60, 40, 20, 50],
+          colors: ['#0000CD', '#1E90FF', '#00BFFF', '#6495ED'], // Màu sắc của VNPT
+        });
         break;
       case 'FPT':
-        setState({ series: [55, 35, 25, 60] });
+        setState({
+          series: [55, 35, 25, 60],
+          colors: ['#FF4500', '#FF7F50', '#FFA500', '#FF6347'], // Màu mặc định
+          // Màu sắc của FPT
+        });
         break;
       default:
-        setState({ series: [65, 34, 12, 56] });
+        setState({
+          series: [70, 30, 15, 45],
+          colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'], // Màu sắc của Viettel
+        }); 
     }
+  };
+
+  const options = {
+    ...defaultOptions,
+    colors: state.colors,
   };
 
   return (
@@ -115,7 +139,10 @@ const ChartThree: React.FC = () => {
       <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
+            <span
+              className="mr-2 block h-3 w-full max-w-3 rounded-full"
+              style={{ backgroundColor: state.colors[0] }}
+            ></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Game </span>
               <span> {state.series[0]}% </span>
@@ -124,7 +151,10 @@ const ChartThree: React.FC = () => {
         </div>
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
+            <span
+              className="mr-2 block h-3 w-full max-w-3 rounded-full"
+              style={{ backgroundColor: state.colors[1] }}
+            ></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Video </span>
               <span> {state.series[1]}% </span>
@@ -133,7 +163,10 @@ const ChartThree: React.FC = () => {
         </div>
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
+            <span
+              className="mr-2 block h-3 w-full max-w-3 rounded-full"
+              style={{ backgroundColor: state.colors[2] }}
+            ></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> News Website </span>
               <span> {state.series[2]}% </span>
@@ -142,7 +175,10 @@ const ChartThree: React.FC = () => {
         </div>
         <div className="sm:w-1/2 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
+            <span
+              className="mr-2 block h-3 w-full max-w-3 rounded-full"
+              style={{ backgroundColor: state.colors[3] }}
+            ></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> VoiceIP </span>
               <span> {state.series[3]}% </span>
