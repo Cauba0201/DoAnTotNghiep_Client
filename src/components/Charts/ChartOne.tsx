@@ -8,7 +8,7 @@ const options: ApexOptions = {
     position: 'top',
     horizontalAlign: 'left',
   },
-  colors: ['#3C50E0', '#80CAEE'],
+  colors: ['#3C50E0', '#80CAEE','#0FADCF'],
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     height: 335,
@@ -70,7 +70,7 @@ const options: ApexOptions = {
   markers: {
     size: 4,
     colors: '#fff',
-    strokeColors: ['#3056D3', '#80CAEE'],
+    strokeColors: ['#3056D3', '#80CAEE','#0FADCF'],
     strokeWidth: 3,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
@@ -134,6 +134,11 @@ const ChartOne: React.FC = () => {
         name: 'Product Two',
         data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
       },
+
+      {
+        name: 'Product Three',
+        data: [10, 5, 36, 40, 5, 75, 60, 55, 90, 26, 72, 40],
+      },
     ],
   });
 
@@ -153,7 +158,7 @@ const ChartOne: React.FC = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-primary">Total Revenue</p>
+              <p className="font-semibold text-primary">Tutorial Viettel</p>
               <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
             </div>
           </div>
@@ -162,7 +167,16 @@ const ChartOne: React.FC = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-secondary"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-secondary">Total Sales</p>
+              <p className="font-semibold text-secondary">Tutorial VNPT</p>
+              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+            </div>
+          </div>
+          <div className="flex min-w-47.5">
+            <span className="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
+            </span>
+            <div className="w-full">
+              <p className="font-semibold text-primary">Tutorial FPT</p>
               <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
             </div>
           </div>
