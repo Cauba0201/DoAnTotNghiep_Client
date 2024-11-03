@@ -12,7 +12,7 @@ import logoFPT from '../../images/imgISP/y-nghia-logo-fpt-lan-3.jpg';
 import logoVNPT from '../../images/imgISP/logo-vnpt-inkythuatso-01-01-14-56-59.jpg';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 
-const ECommerce: React.FC = () => {
+const ConnectApp: React.FC = () => {
   const fetchTest = async () => {
     try {
       const res = await fetch('http://localhost:3000/test/');
@@ -28,7 +28,7 @@ const ECommerce: React.FC = () => {
   }, []);
   return (
     <>
-    <Breadcrumb pageName='Connect Network'/>
+      <Breadcrumb pageName="Connect Application" />
       {/* VIETTEL */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
@@ -87,7 +87,7 @@ const ECommerce: React.FC = () => {
         <CardDataStats
           title="Latency (Avg)"
           total="45 Ms"
-          rate="2.59%"
+          rate="Đây là đo app"
           levelUp
           isp
           img={logoViettel}
@@ -358,4 +358,4 @@ const ECommerce: React.FC = () => {
   );
 };
 
-export default ECommerce;
+export default ConnectApp;

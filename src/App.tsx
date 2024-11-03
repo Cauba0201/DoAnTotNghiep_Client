@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import DefaultLayout from './layout/DefaultLayout';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
+import ConnectApp from './pages/Dashboard/ConnectApp';
 // import GlobalPing from './pages/GlobalePing';
 // import useToken from './hooks/useToken';
 
@@ -38,6 +39,8 @@ function App() {
 
   // if(!token) {
   //   return <SignIn setToken={setToken}/>
+  // } else {
+  //   <SignUp/>
   // }
 
   return (
@@ -54,6 +57,10 @@ function App() {
           <Route
             path="/"
             element={<PageWithTitle title="Dashboard | Monitor International Connection Quality" component={<ECommerce />} />}
+          />
+          <Route
+            path="/connectapp"
+            element={<PageWithTitle title="Connect App | Monitor International Connection Quality" component={<ConnectApp />} />}
           />
           <Route
             path="/calendar"

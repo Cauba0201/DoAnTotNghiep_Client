@@ -184,7 +184,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Home
+                              Network Analyst
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink
+                              to="/connectapp"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                            >
+                              Appliaction Analyst 
                             </NavLink>
                           </li>
                         </ul>
