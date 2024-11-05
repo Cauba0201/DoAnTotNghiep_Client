@@ -12,7 +12,7 @@ const defaultOptions: ApexOptions = {
     fontFamily: 'Satoshi, sans-serif',
     type: 'donut',
   },
-  labels: ['Game', 'Video', 'News Website', 'VoiceIP'],
+  labels: ['Singapore', 'Taiwan', 'Taiwan', 'Hong Kong'],
   legend: {
     show: false,
     position: 'bottom',
@@ -35,7 +35,7 @@ const defaultOptions: ApexOptions = {
 };
 
 const initialState: ChartThreeState = {
-  series: [70, 30, 15, 45],
+  series: [2, 5, 10, 11],
   colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'],
 };
 
@@ -46,8 +46,9 @@ const ChartThree: React.FC = () => {
     try {
       const res = await fetch('http://localhost:3000/toplatency');
       const data = await res.json();
-      if (data?.avg_latency) setState((prevState) => ({ ...prevState, series: data.avg_latency }));
-      return data
+      if (data?.avg_latency)
+        setState((prevState) => ({ ...prevState, series: data.avg_latency }));
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -55,14 +56,23 @@ const ChartThree: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(fetchData())
+    console.log(fetchData());
   }, []);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const providerSettings: Record<string, ChartThreeState> = {
-      Viettel: { series: [70, 30, 15, 45], colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'] },
-      VNPT: { series: [60, 40, 20, 50], colors: ['#0000CD', '#1E90FF', '#00BFFF', '#6495ED'] },
-      FPT: { series: [55, 35, 25, 60], colors: ['#FF4500', '#FF7F50', '#FFA500', '#FF6347'] },
+      Viettel: {
+        series: [2, 5, 10, 11],
+        colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'],
+      },
+      VNPT: {
+        series: [1, 10, 11, 15],
+        colors: ['#0000CD', '#1E90FF', '#00BFFF', '#6495ED'],
+      },
+      FPT: {
+        series: [1, 5, 6, 20],
+        colors: ['#FF4500', '#FF7F50', '#FFA500', '#FF6347'],
+      },
     };
     setState(providerSettings[event.target.value] || initialState);
   };
@@ -70,7 +80,9 @@ const ChartThree: React.FC = () => {
   return (
     <div className="sm:px-7.5 col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5">
       <div className="mb-3 flex justify-between gap-4 sm:flex">
-        <h5 className="text-xl font-semibold text-black dark:text-white">Packet Loss Analytics</h5>
+        <h5 className="text-xl font-semibold text-black dark:text-white">
+          Packet Loss Analytics
+        </h5>
         <select
           onChange={handleSelectChange}
           className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
@@ -84,7 +96,11 @@ const ChartThree: React.FC = () => {
       </div>
 
       <div id="chartThree" className="mb-2 mx-auto flex justify-center">
-        <ReactApexChart options={{ ...defaultOptions, colors: state.colors }} series={state.series} type="donut" />
+        <ReactApexChart
+          options={{ ...defaultOptions, colors: state.colors }}
+          series={state.series}
+          type="donut"
+        />
       </div>
 
       <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">

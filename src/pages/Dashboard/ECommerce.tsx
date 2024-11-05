@@ -24,7 +24,6 @@ const ECommerce: React.FC = () => {
   };
   useEffect(() => {
     fetchTest();
-    // console.log(fetchTest());
   }, []);
   return (
     <>
