@@ -1,5 +1,5 @@
 import { ApexOptions } from 'apexcharts';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const options: ApexOptions = {
@@ -8,7 +8,7 @@ const options: ApexOptions = {
     position: 'top',
     horizontalAlign: 'left',
   },
-  colors: ['#EE0033', '#086BB6','#FC7321'], //VT-VNPT-FPT
+  colors: ['#EE0033', '#086BB6', '#FC7321'], // VT-VNPT-FPT colors
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     height: 335,
@@ -21,7 +21,6 @@ const options: ApexOptions = {
       left: 0,
       opacity: 0.1,
     },
-
     toolbar: {
       show: false,
     },
@@ -29,57 +28,28 @@ const options: ApexOptions = {
   responsive: [
     {
       breakpoint: 1024,
-      options: {
-        chart: {
-          height: 300,
-        },
-      },
+      options: { chart: { height: 300 } },
     },
     {
       breakpoint: 1366,
-      options: {
-        chart: {
-          height: 350,
-        },
-      },
+      options: { chart: { height: 350 } },
     },
   ],
   stroke: {
     width: [2, 2],
     curve: 'straight',
   },
-  // labels: {
-  //   show: false,
-  //   position: "top",
-  // },
   grid: {
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
+    xaxis: { lines: { show: true } },
+    yaxis: { lines: { show: true } },
   },
-  dataLabels: {
-    enabled: false,
-  },
+  dataLabels: { enabled: false },
   markers: {
     size: 4,
     colors: '#fff',
-    strokeColors: ['#EE0033', '#086BB6','#FC7321'], //VT-VNPT-FPT
+    strokeColors: ['#EE0033', '#086BB6', '#FC7321'],
     strokeWidth: 3,
-    strokeOpacity: 0.9,
-    strokeDashArray: 0,
-    fillOpacity: 1,
-    discrete: [],
-    hover: {
-      size: undefined,
-      sizeOffset: 5,
-    },
+    hover: { sizeOffset: 5 },
   },
   xaxis: {
     type: 'category',
@@ -97,21 +67,13 @@ const options: ApexOptions = {
       'Jul',
       'Aug',
     ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
+    axisBorder: { show: false },
+    axisTicks: { show: false },
   },
   yaxis: {
-    title: {
-      style: {
-        fontSize: '0px',
-      },
-    },
     min: 0,
     max: 100,
+    title: { style: { fontSize: '0px' } },
   },
 };
 
@@ -127,84 +89,88 @@ const ChartOne: React.FC = () => {
     series: [
       {
         name: 'Viettel',
-        data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
+        data: Array(12).fill(12),
       },
-
-      {
-        name: 'VNPT',
-        data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
-      },
-
-      {
-        name: 'FPT',
-        data: [10, 5, 36, 40, 5, 75, 60, 55, 90, 26, 72, 40],
-      },
+      { name: 'VNPT', data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51] },
+      { name: 'FPT', data: [10, 5, 36, 40, 5, 75, 60, 55, 90, 26, 72, 40] },
     ],
   });
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
+  const fetchData = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/toplatency/viettel');
+      const result = await res.json();
+      if (result?.avg_latency && Array.isArray(result.avg_latency)) {
+        const latencyNumbers = result.avg_latency.map((value: any) =>
+          parseFloat(value),
+        );
+
+        setState((prevState) => ({
+          series: prevState.series.map((item) =>
+            item.name === 'Viettel' ? { ...item, data: latencyNumbers } : item,
+          ),
+        }));
+      }
+      return result;
+    } catch (error) {
+      console.error('Failed to fetch data:', error);
+    }
   };
-  handleReset;
+
+  useEffect(() => {
+    fetchData();
+    console.log(state);
+    console.log(fetchData());
+  }, []);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          <div className="flex min-w-47.5">
-            <span className="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-[#EE0033]">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-[#EE0033]"></span>
-            </span>
-            <div className="w-full">
-              <p className="font-semibold text-[#EE0033]">Lantency Viettel</p>
-              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+          {['Viettel', 'VNPT', 'FPT'].map((name, index) => (
+            <div key={name} className="flex min-w-47.5">
+              <span
+                className={`mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border`}
+                style={{ borderColor: options.colors?.[index] }}
+              >
+                <span
+                  className="block h-2.5 w-full max-w-2.5 rounded-full"
+                  style={{ backgroundColor: options.colors?.[index] }}
+                ></span>
+              </span>
+              <div className="w-full">
+                <p
+                  className="font-semibold"
+                  style={{ color: options.colors?.[index] }}
+                >
+                  Latency {name}
+                </p>
+                <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+              </div>
             </div>
-          </div>
-          <div className="flex min-w-47.5">
-            <span className="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-[#086BB6]">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-[#086BB6]"></span>
-            </span>
-            <div className="w-full">
-              <p className="font-semibold text-[#086BB6]">Lantency VNPT</p>
-              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
-            </div>
-          </div>
-          <div className="flex min-w-47.5">
-            <span className="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-[#FC7321]">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-[#FC7321]"></span>
-            </span>
-            <div className="w-full">
-              <p className="font-semibold text-[#FC7321]">Lantency FPT</p>
-              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
-            </div>
-          </div>
+          ))}
         </div>
         <div className="flex w-full max-w-45 justify-end">
           <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-            <button className="rounded bg-white py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
-              Day
-            </button>
-            <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-              Week
-            </button>
-            <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
-              Month
-            </button>
+            {['Day', 'Week', 'Month'].map((label) => (
+              <button
+                key={label}
+                className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white dark:text-white"
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div>
-        <div id="chartOne" className="-ml-5">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="area"
-            height={350}
-          />
-        </div>
+      <div id="chartOne" className="-ml-5">
+        <ReactApexChart
+          options={options}
+          series={state.series}
+          type="area"
+          height={350}
+        />
       </div>
     </div>
   );

@@ -47,6 +47,7 @@ const ChartThree: React.FC = () => {
       const res = await fetch('http://localhost:3000/toplatency');
       const data = await res.json();
       if (data?.avg_latency) setState((prevState) => ({ ...prevState, series: data.avg_latency }));
+      return data
     } catch (error) {
       console.error(error);
     }
@@ -54,6 +55,7 @@ const ChartThree: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(fetchData())
   }, []);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -68,7 +70,7 @@ const ChartThree: React.FC = () => {
   return (
     <div className="sm:px-7.5 col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5">
       <div className="mb-3 flex justify-between gap-4 sm:flex">
-        <h5 className="text-xl font-semibold text-black dark:text-white">Application Analytics</h5>
+        <h5 className="text-xl font-semibold text-black dark:text-white">Packet Loss Analytics</h5>
         <select
           onChange={handleSelectChange}
           className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
