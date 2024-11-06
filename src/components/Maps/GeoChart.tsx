@@ -150,7 +150,7 @@ function GeoChart() {
         ]}
         chartType="GeoChart"
         width="100%"
-        height="400px"
+        height="860px"
         data={chartData}
         options={{
           ...chartOptions,
