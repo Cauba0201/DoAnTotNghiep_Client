@@ -72,7 +72,7 @@ const ECommerce: React.FC = () => {
       {testList.map((item, index) => (
         <div
           key={index}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 " //
         >
           <CardDataStats
             title="Country"
@@ -129,7 +129,7 @@ const ECommerce: React.FC = () => {
           </CardDataStats>
           <CardDataStats
             title="Latency (Avg)"
-            total={item.avg_latency || 'Not Found'}
+            total={`${item.avg_latency || 'Not Found'} MS`}
             rate="2.59%"
             levelUp
             isp={false}
@@ -154,7 +154,7 @@ const ECommerce: React.FC = () => {
           </CardDataStats>
           <CardDataStats
             title="Packet Loss"
-            total={item.packet_loss || 'Not Found'}
+            total={`${item.packet_loss || 'Not Found'} %`}
             rate="0.95%"
             levelDown
             isp={false}

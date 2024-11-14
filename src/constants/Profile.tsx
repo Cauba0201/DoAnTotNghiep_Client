@@ -25,8 +25,7 @@ const Profile: React.FC = () => {
         </div>
 
         {/* Middle Section */}
-        <TableOne/>
-      
+        <TableOne />
       </div>
     </>
   );
