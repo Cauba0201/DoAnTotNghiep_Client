@@ -1,7 +1,6 @@
 export interface ChartFiveState {
-    series: {
-      name: string;
-      data: [number, number][];
-    }[];
-  }
-  
+  series: {
+    name: string;
+    data: [number, number][];
+  }[];
+}
