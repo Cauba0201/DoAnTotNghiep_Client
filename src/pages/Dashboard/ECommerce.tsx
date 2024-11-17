@@ -9,6 +9,7 @@ import TableOne from '../../components/Tables/TableOne';
 // import logoFPT from '../../images/imgISP/y-nghia-logo-fpt-lan-3.jpg';
 // import logoVNPT from '../../images/imgISP/logo-vnpt-inkythuatso-01-01-14-56-59.jpg';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
+import ChartFour from '../../components/Charts/ChartFour';
 // import Slider from 'react-slick';
 
 interface TestItems {
@@ -393,7 +394,7 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div> */}
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartTwo />
+        <ChartFour/>
         <ChartThree />
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
