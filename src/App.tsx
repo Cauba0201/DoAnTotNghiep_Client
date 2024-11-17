@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import DefaultLayout from './layout/DefaultLayout';
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
-import ConnectApp from './pages/Dashboard/ConnectApp';
+// import ConnectApp from './pages/Dashboard/ConnectApp';
 // import GlobalPing from './pages/GlobalePing';
 // import useToken from './hooks/useToken';
 
@@ -58,10 +58,10 @@ function App() {
             path="/"
             element={<PageWithTitle title="Dashboard | Monitor International Connection Quality" component={<ECommerce />} />}
           />
-          <Route
+          {/* <Route
             path="/connectapp"
             element={<PageWithTitle title="Connect App | Monitor International Connection Quality" component={<ConnectApp />} />}
-          />
+          /> */}
           <Route
             path="/calendar"
             element={<PageWithTitle title="Calendar | Monitor International Connection Quality" component={<Calendar />} />}
