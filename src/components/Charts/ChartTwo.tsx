@@ -99,7 +99,7 @@ const ChartTwo: React.FC = () => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Totalrial Network
+            Tỷ lệ mất gói tin của ISP theo thời gian
           </h4>
         </div>
         <div>

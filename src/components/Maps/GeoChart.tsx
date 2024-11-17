@@ -35,7 +35,7 @@ export const dataFPT = [
 ];
 
 export const GeoArea = [
-  ['World Map', ''], 
+  ['World Map', ''],
   ['Dong Nam A', '035'],
   ['Trung A', '143'],
   ['Dong A', '030'],
@@ -110,8 +110,8 @@ function GeoChart() {
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-12">
       <div className="flex gap-10">
-        <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
-          Network Traffic
+        <h4 className="mb-4 text-xl font-semibold text-black dark:text-white">
+          Tỷ lệ mất gói tin theo khu vực địa lý
         </h4>
         <select
           onChange={handleSelectChange}
