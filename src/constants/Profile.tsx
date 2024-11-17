@@ -14,9 +14,15 @@ const Profile: React.FC<PingResult> = () => {
   const [ip, setIp] = useState('');
   const [result, setResult] = useState<PingResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handlePing = async () => {
+    if (!ip) { // Kiểm tra nếu IP rỗng
+      setError('Please enter an IP address'); // Thiết lập thông báo lỗi
+      return;
+    }
     setLoading(true);
+    setError('');
     try {
       const response = await axios.post('http://localhost:3000/ping/', { ip });
       setResult(response.data);
@@ -78,6 +84,7 @@ const Profile: React.FC<PingResult> = () => {
               className="py-4 px-10 col-span-4 border rounded border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
             />
           </div>
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </div>
 
         {/* Middle Section */}

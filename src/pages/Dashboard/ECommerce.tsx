@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import CardDataStats from '../../components/CardDataStats';
+// import CardDataStats from '../../components/CardDataStats';
 import ChartOne from '../../components/Charts/ChartOne';
 import ChartThree from '../../components/Charts/ChartThree';
 import ChartTwo from '../../components/Charts/ChartTwo';
 import GeoChart from '../../components/Maps/GeoChart';
 import TableOne from '../../components/Tables/TableOne';
-import logoViettel from '../../images/imgISP/Logo-Tap-doan-vien-thong-Viettel-Moi-02-01-1024x640.jpg';
-import logoFPT from '../../images/imgISP/y-nghia-logo-fpt-lan-3.jpg';
-import logoVNPT from '../../images/imgISP/logo-vnpt-inkythuatso-01-01-14-56-59.jpg';
+// import logoViettel from '../../images/imgISP/Logo-Tap-doan-vien-thong-Viettel-Moi-02-01-1024x640.jpg';
+// import logoFPT from '../../images/imgISP/y-nghia-logo-fpt-lan-3.jpg';
+// import logoVNPT from '../../images/imgISP/logo-vnpt-inkythuatso-01-01-14-56-59.jpg';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 
 interface TestItems {
   country: string;
@@ -69,7 +69,7 @@ const ECommerce: React.FC = () => {
       <Breadcrumb pageName="Connect Network" />
       {/* VIETTEL */}
       {/* <Slider {...settings} className=''> */}
-        {testList.map((item, index) => (
+      {/* {testList.map((item, index) => (
           <div
             key={index}
             className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 "
@@ -177,10 +177,10 @@ const ECommerce: React.FC = () => {
                 </svg>
               </CardDataStats>
           </div>
-        ))}
+        ))} */}
       {/* </Slider> */}
       {/* VNPT */}
-      <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+      {/* <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
           title="Country"
           total="Singapore"
@@ -283,11 +283,11 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-      </div>
+      </div> */}
       {/* </Slider> */}
 
       {/* FPT */}
-      <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+      {/* <div className="grid grid-cols-1 gap-4 mt-2 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats
           title="Country"
           total="Singapore"
@@ -391,8 +391,11 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
+      </div> */}
+      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        <ChartTwo />
+        <ChartThree />
       </div>
-
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />
         <ChartTwo />

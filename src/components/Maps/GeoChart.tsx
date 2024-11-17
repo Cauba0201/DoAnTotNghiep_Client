@@ -35,7 +35,7 @@ export const dataFPT = [
 ];
 
 export const GeoArea = [
-  // ['All Region', ''],
+  ['World Map', ''], 
   ['Dong Nam A', '035'],
   ['Trung A', '143'],
   ['Dong A', '030'],
