@@ -12,6 +12,7 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import ChartFour from '../../components/Charts/ChartFour';
 import ChartFive from '../../components/Charts/ChartFive';
 import ChartSix from '../../components/Charts/ChartSix';
+import ChartSeven from '../../components/Charts/ChartSeven';
 // import Slider from 'react-slick';
 
 interface TestItems {
@@ -399,6 +400,8 @@ const ECommerce: React.FC = () => {
         <ChartFour/>
         <ChartFive />
         <ChartSix />
+        <ChartSeven/>
+
       </div>
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />
