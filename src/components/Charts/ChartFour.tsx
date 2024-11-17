@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Breadcrumb from '../Breadcrumbs/Breadcrumb';
-import { ChartFourState } from '../../interfaces/ChartFour';
+// import { ChartFourState } from '../../interfaces/ChartFour';
 import { ChartFourOptions } from '../../Config/ChartFour';
 
 const ChartFour: React.FC = () => {
@@ -45,7 +45,12 @@ const ChartFour: React.FC = () => {
   return (
     <>
       <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
-        <Breadcrumb pageName={'Phan tich do tre theo thoi gian'} />
+      <div className='mb-5'>
+          <h4 className="text-xl font-semibold text-black dark:text-white">
+          Xu hướng độ trễ theo thời gian
+
+          </h4>
+        </div>
         <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
           <div className="flex w-full flex-wrap gap-3 sm:gap-5">
             {['Viettel', 'VNPT', 'FPT'].map((name, index) => (
@@ -89,9 +94,9 @@ const ChartFour: React.FC = () => {
 
         <div id="chartFour" className="-ml-5">
           <ReactApexChart
-            ChartFourOptions={ChartFourOptions}
+            options={ChartFourOptions}
             series={state.series}
-            type="area"
+            type="line"
             height={350}
           />
         </div>

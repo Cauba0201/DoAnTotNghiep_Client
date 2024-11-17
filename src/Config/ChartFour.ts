@@ -33,6 +33,7 @@ export const ChartFourOptions: ApexOptions = {
         options: { chart: { height: 350 } },
       },
     ],
+    
     stroke: {
       width: [2, 2],
       curve: 'straight',
