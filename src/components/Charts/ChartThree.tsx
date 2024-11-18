@@ -1,38 +1,7 @@
-import { ApexOptions } from 'apexcharts';
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-
-interface ChartThreeState {
-  series: number[];
-  colors: string[];
-}
-
-const defaultOptions: ApexOptions = {
-  chart: {
-    fontFamily: 'Satoshi, sans-serif',
-    type: 'donut',
-  },
-  labels: ['Singapore', 'Taiwan', 'Taiwan', 'Hong Kong'],
-  legend: {
-    show: false,
-    position: 'bottom',
-  },
-  plotOptions: {
-    pie: {
-      donut: {
-        size: '65%',
-        background: 'transparent',
-      },
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  responsive: [
-    { breakpoint: 2600, options: { chart: { width: 380 } } },
-    { breakpoint: 640, options: { chart: { width: 200 } } },
-  ],
-};
+import { ChartThreeState } from '../../interfaces/ChartThree';
+import { ChartThreeOptions } from '../../Config/ChartThree';
 
 const initialState: ChartThreeState = {
   series: [2, 5, 10, 11],
@@ -97,7 +66,7 @@ const ChartThree: React.FC = () => {
 
       <div id="chartThree" className="mb-2 mx-auto flex justify-center">
         <ReactApexChart
-          options={{ ...defaultOptions, colors: state.colors }}
+          options={{ ...ChartThreeOptions, colors: state.colors }}
           series={state.series}
           type="donut"
         />
@@ -112,7 +81,7 @@ const ChartThree: React.FC = () => {
                 style={{ backgroundColor: state.colors[index] }}
               ></span>
               <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-                <span>{defaultOptions.labels?.[index]}</span>
+                <span>{ChartThreeOptions.labels?.[index]}</span>
                 <span>{value}%</span>
               </p>
             </div>

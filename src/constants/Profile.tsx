@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import TableOne from '../components/Tables/TableOne';
 import axios from 'axios';
-
-interface PingResult {
-  location: string;
-  ip: string;
-  ltc: string;
-  pkl: string;
-  sent: string;
-}
+import { PingResult } from '../interfaces/GlobalPingPage';
 
 const Profile: React.FC<PingResult> = () => {
   const [ip, setIp] = useState('');
@@ -17,7 +10,8 @@ const Profile: React.FC<PingResult> = () => {
   const [error, setError] = useState('');
 
   const handlePing = async () => {
-    if (!ip) { // Kiểm tra nếu IP rỗng
+    if (!ip) {
+      // Kiểm tra nếu IP rỗng
       setError('Please enter an IP address'); // Thiết lập thông báo lỗi
       return;
     }
