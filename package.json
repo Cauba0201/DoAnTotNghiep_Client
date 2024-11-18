@@ -9,9 +9,7 @@
     "preview": "vite preview",
     "test": "jest --watchAll --verbose "
   },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
+ 
   "author": {
     "name": "AnNguyen",
     "email": "nguyenan0201no1@gmail.com",
@@ -54,6 +52,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.2.5",
     "vite": "^4.4.7",
     "webpack": "^5.88.2"
   }
