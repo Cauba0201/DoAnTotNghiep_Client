@@ -130,7 +130,7 @@ const ChartFive: React.FC = () => {
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Điểm dữ liệu bất thường
+            Unusual Data Point
           </h4>
         </div>
         <div>

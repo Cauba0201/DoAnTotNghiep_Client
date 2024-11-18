@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const options: ApexOptions = {
-  colors: ['#EE0033', '#086BB6','#FC7321'],
+  colors: ['#EE0033', '#086BB6', '#FC7321'],
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     type: 'bar',
@@ -86,20 +86,20 @@ const ChartTwo: React.FC = () => {
       },
     ],
   });
-  
+
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
     }));
   };
-  handleReset;  
+  handleReset;
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
       <div className="mb-4 justify-between gap-4 sm:flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Tỷ lệ mất gói tin của ISP theo thời gian
+            ISP Packet Loss Rate Over Time
           </h4>
         </div>
         <div>
@@ -109,8 +109,12 @@ const ChartTwo: React.FC = () => {
               id="#"
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="" className='dark:bg-boxdark'>This Week</option>
-              <option value="" className='dark:bg-boxdark'>Last Week</option>
+              <option value="" className="dark:bg-boxdark">
+                This Week
+              </option>
+              <option value="" className="dark:bg-boxdark">
+                Last Week
+              </option>
             </select>
             <span className="absolute top-1/2 right-3 z-10 -translate-y-1/2">
               <svg

@@ -111,7 +111,7 @@ function GeoChart() {
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-12">
       <div className="flex gap-10">
         <h4 className="mb-4 text-xl font-semibold text-black dark:text-white">
-          Tỷ lệ mất gói tin theo khu vực địa lý
+          ISP Packet Loss Rate by Geographic Area
         </h4>
         <select
           onChange={handleSelectChange}
