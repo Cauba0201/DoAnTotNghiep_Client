@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-// import Breadcrumb from '../Breadcrumbs/Breadcrumb';
 // import { ChartFourState } from '../../interfaces/ChartFour';
 import { ChartFourOptions } from '../../Config/ChartFour';
 
@@ -45,10 +44,9 @@ const ChartFour: React.FC = () => {
   return (
     <>
       <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
-      <div className='mb-5'>
+        <div className="mb-5">
           <h4 className="text-xl font-semibold text-black dark:text-white">
-          Trend of Latency Over Time
-
+            Trend of Latency Over Time
           </h4>
         </div>
         <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
@@ -73,7 +71,7 @@ const ChartFour: React.FC = () => {
                   >
                     Latency {name}
                   </p>
-                  <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                  {/* <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p> */}
                 </div>
               </div>
             ))}
