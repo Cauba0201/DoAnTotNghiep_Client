@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-// import { ChartFourState } from '../../interfaces/ChartFour';
+import { ChartFourState } from '../../interfaces/ChartFour';
 import { ChartFourOptions } from '../../Config/ChartFour';
 
 const ChartFour: React.FC = () => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<ChartFourState>({
     series: [
       {
         name: 'Viettel',
