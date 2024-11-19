@@ -71,7 +71,7 @@ export const ChartFourOptions: ApexOptions = {
     },
     yaxis: {
       min: 0,
-      max: 100,
+      max: 500,
       title: { style: { fontSize: '0px' } },
     },
   };
