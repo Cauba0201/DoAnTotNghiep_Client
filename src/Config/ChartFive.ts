@@ -11,9 +11,9 @@ export const ChartFiveOption: ApexOptions = {
       show: false,
     },
     zoom: {
-        enabled: true,
-        type: 'xy'
-      }
+      enabled: true,
+      type: 'xy',
+    },
   },
 
   responsive: [
@@ -45,13 +45,19 @@ export const ChartFiveOption: ApexOptions = {
   xaxis: {
     tickAmount: 10,
     labels: {
-      formatter: function(val) {
-        return parseFloat(val).toFixed(1)
-      }
-    }
+      formatter: function (val) {
+        return parseFloat(val).toFixed(1);
+      },
+    },
+    title: {
+      text: 'Hour of the Day',
+    },
   },
   yaxis: {
     tickAmount: 7,
+    title: {
+      text: 'Average Latency (ms)',
+    },
   },
   legend: {
     position: 'top',
@@ -66,5 +72,11 @@ export const ChartFiveOption: ApexOptions = {
   },
   fill: {
     opacity: 1,
+  },
+  tooltip: {
+    shared: false,
+    y: {
+      formatter: (val: number) => `${val.toFixed(2)} ms`,
+    },
   },
 };

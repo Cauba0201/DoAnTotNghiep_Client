@@ -47,7 +47,6 @@ const ChartFour: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(state);
   }, []);
   return (
     <>
