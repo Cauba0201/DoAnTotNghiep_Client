@@ -12,6 +12,7 @@ export const ChartSixOption: ApexOptions = {
       top: 1,
     },
   },
+  colors: ['#8B0000', '#008FFB', '#FF4500'],
 
   stroke: {
     width: 2,

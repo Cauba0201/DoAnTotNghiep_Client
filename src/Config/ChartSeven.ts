@@ -34,7 +34,8 @@ export const ChartSevenOption: ApexOptions = {
 //   },
 
   responsive: [
-    { breakpoint: 2600, options: { chart: { width: 1400 } } },
-    { breakpoint: 640, options: { chart: { width: 200 } } },
+    { breakpoint: 2600, options: { chart: { width: 850 } } },
+    { breakpoint: 640, options: { chart: { width: 300 } } },
   ],
+  
 };
