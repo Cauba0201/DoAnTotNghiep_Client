@@ -3,7 +3,7 @@ import { ApexOptions } from 'apexcharts';
 export const ChartSixOption: ApexOptions = {
   chart: {
     fontFamily: 'Satoshi, sans-serif',
-    height: 360,
+    height: 380,
     type: 'radar',
     dropShadow: {
       enabled: true,
@@ -27,7 +27,7 @@ export const ChartSixOption: ApexOptions = {
     stepSize: 20,
   },
   xaxis: {
-    categories: ['2011', '2012', '2013', '2014', '2015', '2016'],
+    categories: ['Latency', 'Packet Loss', 'Jitter', 'Packet Sent', '2015', '2016'],
   },
 
   responsive: [

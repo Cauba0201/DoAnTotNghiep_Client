@@ -5,20 +5,7 @@ import { ChartTwoOption } from '../../Config/ChartTwo';
 
 const ChartTwo: React.FC = () => {
   const [state, setState] = useState<ChartTwoState>({
-    series: [
-      {
-        name: 'Viettel',
-        data: [16, 17, 17, 18, 17, 16, 19],
-      },
-      {
-        name: 'VNPT',
-        data: [13, 13, 17, 18, 13, 17, 15],
-      },
-      {
-        name: 'FPT',
-        data: [13, 15, 17, 18, 17, 17, 15],
-      },
-    ],
+    series: [],
   });
 
   const handleReset = () => {
@@ -78,7 +65,7 @@ const ChartTwo: React.FC = () => {
         <div id="chartTwo" className="-ml-5 -mb-9">
           <ReactApexChart
             options={ChartTwoOption}
-            series={state.series}
+            series={ChartTwoOption.series}
             type="bar"
             height={350}
           />
