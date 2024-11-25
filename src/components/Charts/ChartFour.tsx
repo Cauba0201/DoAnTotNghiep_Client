@@ -8,16 +8,16 @@ const ChartFour: React.FC = () => {
     series: [
       {
         name: 'Viettel',
-        data: [], //2, 23, 23, 24, 24, 24, 24, 25, 25, 25, 26, 27
+        data: [],
       },
-      { name: 'VNPT', data: [] }, //30, 30, 31, 31, 31, 32, 32, 34, 34, 35, 36, 37
-      { name: 'FPT', data: [] }, //10, 10, 11, 13, 20, 30, 40, 45, 46, 20, 20, 21
+      { name: 'VNPT', data: [] },
+      { name: 'FPT', data: [] },
     ],
   });
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3000/test/latency');
+      const res = await fetch('http://localhost:3000/test/latencyhour');
       const result = await res.json();
 
       if (Array.isArray(result)) {
