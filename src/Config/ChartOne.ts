@@ -51,26 +51,13 @@ export const ChartOneOptions: ApexOptions = {
     },
     xaxis: {
       type: 'category',
-      categories: [
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-      ],
+      categories:[],
       axisBorder: { show: false },
       axisTicks: { show: false },
     },
     yaxis: {
       min: 0,
-      max: 100,
+      max: 500,
       title: { style: { fontSize: '0px' } },
     },
   };

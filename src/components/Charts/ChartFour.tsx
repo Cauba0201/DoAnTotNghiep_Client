@@ -17,7 +17,7 @@ const ChartFour: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3000/test/latencyhour');
+      const res = await fetch('http://localhost:3000/test/latency');
       const result = await res.json();
 
       if (Array.isArray(result)) {

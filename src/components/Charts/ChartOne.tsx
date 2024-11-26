@@ -8,27 +8,37 @@ const ChartOne: React.FC = () => {
     series: [
       {
         name: 'Viettel',
-        data: [23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 26, 27],
+        data: [], //23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 26, 27
       },
-      { name: 'VNPT', data: [30, 30, 31, 31, 31, 32, 32, 34, 34, 35, 36, 37] },
-      { name: 'FPT', data: [10, 10, 11, 13, 20, 30, 40, 45, 46, 20, 20, 21] },
+      { name: 'VNPT', data: [] }, //30, 30, 31, 31, 31, 32, 32, 34, 34, 35, 36, 37
+      { name: 'FPT', data: [] }, //10, 10, 11, 13, 20, 30, 40, 45, 46, 20, 20, 21
     ],
   });
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3000/toplatency/viettel');
+      const res = await fetch('http://localhost:3000/test/latencyhour');
       const result = await res.json();
-      if (result?.avg_latency && Array.isArray(result.avg_latency)) {
-        const latencyNumbers = result.avg_latency.map((value: any) =>
-          parseFloat(value),
-        );
 
-        setState((prevState) => ({
-          series: prevState.series.map((item) =>
-            item.name === 'Viettel' ? { ...item, data: latencyNumbers } : item,
-          ),
-        }));
+      if (Array.isArray(result)) {
+        const updatedSeries = state.series.map((item) => {
+          const ispData = result.filter(
+            (entry) =>
+              entry.local_isp &&
+              entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
+          );
+
+          const latencyNumbers = ispData.map((entry) =>
+            parseFloat(entry.avg_latency),
+          );
+
+          return {
+            ...item,
+            data: latencyNumbers,
+          };
+        });
+
+        setState({ series: updatedSeries });
       }
       return result;
     } catch (error) {
@@ -38,8 +48,6 @@ const ChartOne: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(state);
-    console.log(fetchData());
   }, []);
 
   return (
