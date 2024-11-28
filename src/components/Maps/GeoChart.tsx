@@ -43,6 +43,24 @@ function GeoChart() {
     });
   };
 
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await fetch('http://localhost:3000/test/latency');
+  //     const result = await res.json();
+
+  //     const formatedData = [
+  //       ['Country', 'Avg PacketLoss'],
+  //       ...result.map((item: { country: string; avgPacketLoss: number }) => [
+  //         item.country,
+  //         item.avgPacketLoss,
+  //       ]),
+  //     ];
+  //     setChartData(formatedData);
+  //   } catch (error) {
+  //     setChartData([['Country', 'Average Packet Loss']]); // Dữ liệu trống nếu lỗi
+  //   }
+  // };
+
   const handleSelectRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const regionCode = event.target.value;
     // Cập nhật khu vực hiển thị trên bản đồ
@@ -51,6 +69,9 @@ function GeoChart() {
       regionCode,
     }));
   };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-12">
@@ -81,18 +102,18 @@ function GeoChart() {
       </div>
 
       <Chart
-        chartEvents={[
-          {
-            eventName: 'select',
-            callback: ({ chartWrapper }) => {
-              const chart = chartWrapper.getChart();
-              const selection = chart.getSelection();
-              if (selection.length === 0) return;
-              const region = chartData[selection[0].row + 1];
-              console.log('Selected : ' + region);
-            },
-          },
-        ]}
+        // chartEvents={[
+        //   {
+        //     eventName: 'select',
+        //     callback: ({ chartWrapper }) => {
+        //       const chart = chartWrapper.getChart();
+        //       const selection = chart.getSelection();
+        //       if (selection.length === 0) return;
+        //       const region = chartData[selection[0].row + 1];
+        //       console.log('Selected : ' + region);
+        //     },
+        //   },
+        // ]}
         chartType="GeoChart"
         width="100%"
         height="860px"
