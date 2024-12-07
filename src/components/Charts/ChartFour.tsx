@@ -32,12 +32,7 @@ const ChartFour: React.FC = () => {
                 entry.local_isp &&
                 entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
             )
-            .sort(
-              (a, b) =>
-                new Date(b.updated_date).getTime() -
-                new Date(a.updated_date).getTime(),
-            )
-            .slice(0, numberOfSample);
+            .slice(-numberOfSample);
 
           const latencyNumbers = ispData.map((entry) =>
             parseFloat(entry.avg_latency),
