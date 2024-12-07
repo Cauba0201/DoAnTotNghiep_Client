@@ -60,6 +60,17 @@ export const ChartTwoOption: ApexOptions = {
 
   xaxis: {
     categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    title: {
+      text: 'Time (Day)',
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Packet Loss Rate (%)',
+      // style: { fontSize: '0px' },
+    },
+    min: 0,
+    max: 100,
   },
   stroke: {
     show: true,

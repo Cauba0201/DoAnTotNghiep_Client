@@ -4,6 +4,7 @@ import { ChartFourState } from '../../interfaces/ChartFour';
 import { ChartFourOptions } from '../../Config/ChartFour';
 
 const ChartFour: React.FC = () => {
+  const [timeframe, setTimeframe] = useState<'day' | 'week'>('day'); // Mặc định là "day"
   const [state, setState] = useState<ChartFourState>({
     series: [
       {
@@ -15,18 +16,28 @@ const ChartFour: React.FC = () => {
     ],
   });
 
-  const fetchData = async () => {
+  const fetchData = async (timeframe: 'day' | 'week') => {
     try {
-      const res = await fetch('http://localhost:3000/test/latency');
+      const res = await fetch(
+        `http://localhost:3000/test/latency?timeframe=${timeframe}`,
+      );
       const result = await res.json();
 
       if (Array.isArray(result)) {
+        const numberOfSample = timeframe === 'day' ? 24 : 168;
         const updatedSeries = state.series.map((item) => {
-          const ispData = result.filter(
-            (entry) =>
-              entry.local_isp &&
-              entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
-          );
+          const ispData = result
+            .filter(
+              (entry) =>
+                entry.local_isp &&
+                entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
+            )
+            .sort(
+              (a, b) =>
+                new Date(b.updated_date).getTime() -
+                new Date(a.updated_date).getTime(),
+            )
+            .slice(0, numberOfSample);
 
           const latencyNumbers = ispData.map((entry) =>
             parseFloat(entry.avg_latency),
@@ -46,8 +57,9 @@ const ChartFour: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(timeframe);
+  }, [timeframe]);
+
   return (
     <>
       <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
@@ -84,10 +96,17 @@ const ChartFour: React.FC = () => {
           </div>
           <div className="flex w-full max-w-45 justify-end">
             <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-              {['Day', 'Week', 'Month'].map((label) => (
+              {['Day', 'Week'].map((label) => (
                 <button
                   key={label}
-                  className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white dark:text-white"
+                  className={`rounded py-1 px-3 text-xs font-medium text-black hover:bg-white dark:text-white ${
+                    timeframe === label.toLowerCase()
+                      ? 'bg-blue-500 text-white'
+                      : ''
+                  }`}
+                  onClick={() =>
+                    setTimeframe(label.toLowerCase() as 'day' | 'week')
+                  }
                 >
                   {label}
                 </button>

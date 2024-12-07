@@ -55,10 +55,16 @@ export const ChartFourOptions: ApexOptions = {
       categories: Array.from({ length: 24 }, (_, i) => `${i}:00`),
       axisBorder: { show: false },
       axisTicks: { show: false },
+      title: {
+        text: 'Hour of the Day',
+      },
     },
     yaxis: {
       min: 0,
       max: 500,
-      title: { style: { fontSize: '0px' } },
+      title: {
+        text: 'Latency (ms)',
+        // style: { fontSize: '0px' },
+      },
     },
   };
