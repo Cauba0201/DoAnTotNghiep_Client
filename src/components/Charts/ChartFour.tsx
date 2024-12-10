@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ChartFourState } from '../../interfaces/ChartFour';
 import { ChartFourOptions } from '../../Config/ChartFour';
+import { LatencyService } from '../../services/chartFour';
 
 const ChartFour: React.FC = () => {
   const [timeframe, setTimeframe] = useState<'day' | 'week'>('day'); // Mặc định là "day"
@@ -16,45 +17,27 @@ const ChartFour: React.FC = () => {
     ],
   });
 
-  const fetchData = async (timeframe: 'day' | 'week') => {
-    try {
-      const res = await fetch(
-        `http://localhost:3000/test/latency?timeframe=${timeframe}`,
-      );
-      const result = await res.json();
-
-      if (Array.isArray(result)) {
-        const numberOfSample = timeframe === 'day' ? 24 : 168;
-        const updatedSeries = state.series.map((item) => {
-          const ispData = result
-            .filter(
-              (entry) =>
-                entry.local_isp &&
-                entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
-            )
-            .slice(-numberOfSample);
-
-          const latencyNumbers = ispData.map((entry) =>
-            parseFloat(entry.avg_latency),
-          );
-
-          return {
-            ...item,
-            data: latencyNumbers,
-          };
-        });
-
-        setState({ series: updatedSeries });
-      }
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-    }
-  };
+  const latencyService = new LatencyService('http://localhost:3000/test/latency');
 
   useEffect(() => {
-    fetchData(timeframe);
-  }, [timeframe]);
+    const fetchData = async () => {
+      const samples = timeframe === 'day' ? 24 : 168;
+      const seriesNames = state.series.map((item) => item.name);
 
+      try {
+        const updatedSeries = await latencyService.fetchLatencyData(
+          timeframe,
+          seriesNames,
+          samples,
+        );
+        setState({ series: updatedSeries });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [timeframe]);
   return (
     <>
       <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
