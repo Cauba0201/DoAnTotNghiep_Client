@@ -2,25 +2,25 @@ import { ApexOptions } from 'apexcharts';
 
 export const ChartTwoOption: ApexOptions = {
   colors: ['#EE0033', '#086BB6', '#FC7321'],
-  series: [
-    {
-      name: 'Viettel',
-      data: [16, 17, 17, 18, 17, 16, 19],
-    },
-    {
-      name: 'VNPT',
-      data: [13, 13, 17, 18, 13, 17, 15],
-    },
-    {
-      name: 'FPT',
-      data: [13, 15, 17, 18, 17, 17, 15],
-    },
-  ],
+  // series: [
+  //   {
+  //     name: 'Viettel',
+  //     data: [16, 17, 17, 18, 17, 16, 19],
+  //   },
+  //   {
+  //     name: 'VNPT',
+  //     data: [13, 13, 17, 18, 13, 17, 15],
+  //   },
+  //   {
+  //     name: 'FPT',
+  //     data: [13, 15, 17, 18, 17, 17, 15],
+  //   },
+  // ],
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     type: 'bar',
     height: 335,
-    stacked: true,
+    // stacked: true, // không chồng nên nhau
     toolbar: {
       show: false,
     },
@@ -36,7 +36,7 @@ export const ChartTwoOption: ApexOptions = {
         plotOptions: {
           bar: {
             borderRadius: 0,
-            columnWidth: '25%',
+            columnWidth: '50%',
           },
         },
       },
@@ -46,7 +46,7 @@ export const ChartTwoOption: ApexOptions = {
     bar: {
       horizontal: false,
       borderRadius: 0,
-      columnWidth: '25%',
+      columnWidth: '90%',
       borderRadiusApplication: 'end',
       borderRadiusWhenStacked: 'last',
       dataLabels: {
@@ -59,7 +59,15 @@ export const ChartTwoOption: ApexOptions = {
   },
 
   xaxis: {
-    categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    categories: [
+      'Monday ',
+      'Tueday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ],
     title: {
       text: 'Time (Day)',
     },
@@ -70,7 +78,7 @@ export const ChartTwoOption: ApexOptions = {
       // style: { fontSize: '0px' },
     },
     min: 0,
-    max: 100,
+    max: 150,
   },
   stroke: {
     show: true,
