@@ -1,7 +1,10 @@
+
+export interface ChartTwoSeries {
+  name: string;
+  data: { x: string; y: number }[];
+}
+
 export interface ChartTwoState {
-  series: {
-    name: string;
-    data: { x: string; y: number }[]; // Đổi từ number[] sang dạng ApexCharts
-  }[];
+  series: ChartTwoSeries[];
   categories: string[];
 }
