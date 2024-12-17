@@ -55,7 +55,7 @@ export const ChartTwoOption: ApexOptions = {
       text: 'Packet Loss Rate (%)',
     },
     min: 0,
-    max: 150,
+    max: 200,
   },
   stroke: {
     show: true,

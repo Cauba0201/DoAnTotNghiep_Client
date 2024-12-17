@@ -2,11 +2,29 @@ import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ChartTwoState } from '../../interfaces/ChartTwo';
 import { ChartTwoOption } from '../../Config/ChartTwo';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(isBetween);
 
 const ChartTwo: React.FC = () => {
-  // const [timeframe, setTimeframe] = useState<'thisweek' | 'lastweek'>(
-  //   'thisweek',
-  // );
+  const [timeFrame, setTimeFrame] = useState<'thisMonth' | 'lastMonth'>(
+    'thisMonth',
+  );
+
+  const filterDataByWeek = (data: any[], type: 'thisMonth' | 'lastMonth') => {
+    const today = dayjs();
+    const startOfThisMonth = today.startOf('month');
+    const startOfLastMonth = startOfThisMonth.subtract(1, 'week');
+
+    const startDate = type === 'thisMonth' ? startOfThisMonth : startOfLastMonth;
+    const endDate = startDate.endOf('month');
+
+    return data.filter((item) =>
+      dayjs(item.update_date).isBetween(startDate, endDate, null, '[]'),
+    );
+  };
+
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
@@ -30,37 +48,37 @@ const ChartTwo: React.FC = () => {
       try {
         const res = await fetch('http://localhost:3000/test/packetloss');
         const data = await res.json();
+
         if (data && Array.isArray(data)) {
-          // Khởi tạo đối tượng để nhóm dữ liệu packet loss theo ISP
+          // Lọc dữ liệu dựa trên timeFrame
+          const filteredData = filterDataByWeek(data, timeFrame);
+
+          // Nhóm dữ liệu packet loss theo ISP
           const ispData: { [key: string]: { x: string; y: number }[] } = {
             'VIETTEL-VN': [],
             'VNPT-VN': [],
             'FPTDYNAMICIP-NET': [],
           };
 
-          // Trích xuất dữ liệu packet loss và update_date
-          data.forEach((item) => {
-            const date = new Date(item.update_date).toLocaleDateString('en-GB'); // Format ngày
+          filteredData.forEach((item) => {
+            const date = new Date(item.update_date).toLocaleDateString('en-GB');
             ispData[item.local_isp]?.push({ x: date, y: item.packloss });
           });
 
-          // Tạo series mới
+          // Tạo series mới và categories
           const updatedSeries = [
             { name: 'Viettel', data: ispData['VIETTEL-VN'] },
             { name: 'VNPT', data: ispData['VNPT-VN'] },
             { name: 'FPT', data: ispData['FPTDYNAMICIP-NET'] },
           ];
-
-          // Trích xuất ngày duy nhất để làm categories
           const allDates = Array.from(
             new Set(
-              data.map((item) =>
+              filteredData.map((item) =>
                 new Date(item.update_date).toLocaleDateString('en-GB'),
               ),
             ),
           );
 
-          // Cập nhật state
           setState({
             series: updatedSeries,
             categories: allDates,
@@ -70,8 +88,9 @@ const ChartTwo: React.FC = () => {
         console.error('Error fetching data:', error);
       }
     };
+
     fetchData();
-  }, []);
+  }, [timeFrame]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
@@ -84,14 +103,16 @@ const ChartTwo: React.FC = () => {
         <div>
           <div className="relative z-20 inline-block">
             <select
-              name="#"
-              id="#"
+              value={timeFrame}
+              onChange={(e) =>
+                setTimeFrame(e.target.value as 'thisMonth' | 'lastMonth')
+              }
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="" className="dark:bg-boxdark">
+              <option value="thisMonth" className="dark:bg-boxdark">
                 This Week
               </option>
-              <option value="" className="dark:bg-boxdark">
+              <option value="lastMonth" className="dark:bg-boxdark">
                 Last Week
               </option>
             </select>
