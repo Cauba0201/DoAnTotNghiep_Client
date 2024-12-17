@@ -1,5 +1,8 @@
 export interface ChartGeoState {
-  series: string[];
-  name: string[];
+  series: Array<{
+    name: string;
+    data: number[];
+  }>;
   regionCode: string;
+  // selectedDate: string;
 }

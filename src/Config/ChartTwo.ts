@@ -2,20 +2,6 @@ import { ApexOptions } from 'apexcharts';
 
 export const ChartTwoOption: ApexOptions = {
   colors: ['#EE0033', '#086BB6', '#FC7321'],
-  // series: [
-  //   {
-  //     name: 'Viettel',
-  //     data: [16, 17, 17, 18, 17, 16, 19],
-  //   },
-  //   {
-  //     name: 'VNPT',
-  //     data: [13, 13, 17, 18, 13, 17, 15],
-  //   },
-  //   {
-  //     name: 'FPT',
-  //     data: [13, 15, 17, 18, 17, 17, 15],
-  //   },
-  // ],
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     type: 'bar',
@@ -58,24 +44,15 @@ export const ChartTwoOption: ApexOptions = {
     enabled: true,
   },
 
-  xaxis: {
-    categories: [
-      'Monday ',
-      'Tueday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ],
-    title: {
-      text: 'Time (Day)',
-    },
-  },
+  // xaxis: {
+  //   categories: getDaysInMonthWithWeekdays(2024, 11),
+  //   title: {
+  //     text: 'Time (Day)',
+  //   },
+  // },
   yaxis: {
     title: {
       text: 'Packet Loss Rate (%)',
-      // style: { fontSize: '0px' },
     },
     min: 0,
     max: 150,
@@ -95,12 +72,20 @@ export const ChartTwoOption: ApexOptions = {
     fontFamily: 'Satoshi',
     fontWeight: 500,
     fontSize: '14px',
-
-    // markers: {
-    //   radius: 99,
-    // },
   },
   fill: {
     opacity: 1,
   },
 };
+
+
+// const getDaysInMonthWithWeekdays = (year: number, month: number): string[] => {
+//   const days = new Date(year, month, 0).getDate(); // Lấy số ngày trong tháng
+//   const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+//   return Array.from({ length: days }, (_, i) => {
+//     const date = new Date(year, month - 1, i + 1); // Lưu ý: month bắt đầu từ 0
+//     const dayOfWeek = weekdays[date.getDay()]; // Lấy tên ngày trong tuần
+//     return `${dayOfWeek}, ${i + 1}-${month}`; // Ví dụ: "Monday, 1-12"
+//   });
+// };

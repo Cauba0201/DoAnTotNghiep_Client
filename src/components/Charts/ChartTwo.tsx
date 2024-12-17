@@ -4,49 +4,74 @@ import { ChartTwoState } from '../../interfaces/ChartTwo';
 import { ChartTwoOption } from '../../Config/ChartTwo';
 
 const ChartTwo: React.FC = () => {
-  const [timeframe, setTimeframe] = useState<'thisweek' | 'lastweek'>(
-    'thisweek',
-  );
+  // const [timeframe, setTimeframe] = useState<'thisweek' | 'lastweek'>(
+  //   'thisweek',
+  // );
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
         name: 'Viettel',
-        data: [0, 0, 0, 0, 0, 0, 0],
+        data: [],
       },
       {
         name: 'VNPT',
-        data: [0, 0, 0, 0, 0, 0, 0],
+        data: [],
       },
       {
         name: 'FPT',
-        data: [0, 0, 0, 0, 0, 0, 0],
+        data: [],
       },
     ],
+    categories: [],
   });
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch('http://localhost:3000/test/packetloss');
-      const data = await res.json();
-
-      if (data?.packloss)
-        setState((prevState) => ({ ...prevState, series: data.packloss }));
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/test/packetloss');
+        const data = await res.json();
+        if (data && Array.isArray(data)) {
+          // Khởi tạo đối tượng để nhóm dữ liệu packet loss theo ISP
+          const ispData: { [key: string]: { x: string; y: number }[] } = {
+            'VIETTEL-VN': [],
+            'VNPT-VN': [],
+            'FPTDYNAMICIP-NET': [],
+          };
+
+          // Trích xuất dữ liệu packet loss và update_date
+          data.forEach((item) => {
+            const date = new Date(item.update_date).toLocaleDateString('en-GB'); // Format ngày
+            ispData[item.local_isp]?.push({ x: date, y: item.packloss });
+          });
+
+          // Tạo series mới
+          const updatedSeries = [
+            { name: 'Viettel', data: ispData['VIETTEL-VN'] },
+            { name: 'VNPT', data: ispData['VNPT-VN'] },
+            { name: 'FPT', data: ispData['FPTDYNAMICIP-NET'] },
+          ];
+
+          // Trích xuất ngày duy nhất để làm categories
+          const allDates = Array.from(
+            new Set(
+              data.map((item) =>
+                new Date(item.update_date).toLocaleDateString('en-GB'),
+              ),
+            ),
+          );
+
+          // Cập nhật state
+          setState({
+            series: updatedSeries,
+            categories: allDates,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchData();
   }, []);
-
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-  handleReset;
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
@@ -78,7 +103,10 @@ const ChartTwo: React.FC = () => {
       <div>
         <div id="chartTwo" className="-ml-5 -mb-9">
           <ReactApexChart
-            options={ChartTwoOption}
+            options={{
+              ...ChartTwoOption,
+              xaxis: { categories: state.categories },
+            }}
             series={state.series}
             type="bar"
             height={350}

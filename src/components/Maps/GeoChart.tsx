@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import { ChartGeoState } from '../../interfaces/GeoChart';
 import { dataViettel } from '../../data/GeoChart';
@@ -22,10 +22,19 @@ function GeoChart() {
   const [chartData, setChartData] = useState(dataViettel); // Dữ liệu mặc định là của Viettel
   const [chartOptions, setChartOptions] = useState(initialOptions);
   const [state, setState] = useState<ChartGeoState>({
-    series: [],
-    name: [],
+    series: [
+      {
+        name: 'Viettel',
+        data: [],
+      },
+      { name: 'VNPT', data: [] },
+      { name: 'FPT', data: [] },
+    ],
+    // name: [],
     regionCode: '035', // Mặc định là Đông Nam Á
+    // selectedDate: '', // Ngày được chọn
   });
+  // const [availableDates, setAvailableDates] = useState<string[]>([]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const provider = event.target.value;
@@ -43,23 +52,59 @@ function GeoChart() {
     });
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const res = await fetch('http://localhost:3000/test/latency');
-  //     const result = await res.json();
+  const fetchData = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/geo/latency');
+      const result = await res.json();
 
-  //     const formatedData = [
-  //       ['Country', 'Avg PacketLoss'],
-  //       ...result.map((item: { country: string; avgPacketLoss: number }) => [
-  //         item.country,
-  //         item.avgPacketLoss,
-  //       ]),
-  //     ];
-  //     setChartData(formatedData);
-  //   } catch (error) {
-  //     setChartData([['Country', 'Average Packet Loss']]); // Dữ liệu trống nếu lỗi
-  //   }
-  // };
+      // Nhóm dữ liệu theo ngày và nhà mạng
+      const groupedData = result.reduce((acc: any, item: any) => {
+        const date = item.updated_date.split('T')[0]; // Lấy phần ngày từ updated_date
+
+        if (!acc[date]) {
+          acc[date] = {
+            Viettel: [],
+            VNPT: [],
+            FPT: [],
+          };
+        }
+
+        // Phân loại dữ liệu vào nhà mạng (giả sử local_isp xác định nhà mạng)
+        const provider = getProvider(item.local_isp); // Hàm xác định nhà mạng từ ISP
+        acc[date][provider].push(item.packet_loss);
+
+        return acc;
+      }, {});
+
+      // Format lại dữ liệu cho series
+      const formattedSeries = Object.keys(groupedData).map((date) => ({
+        date,
+        Viettel: average(groupedData[date].Viettel),
+        VNPT: average(groupedData[date].VNPT),
+        FPT: average(groupedData[date].FPT),
+      }));
+
+      // Cập nhật state
+      // setState((prevState) => ({
+      //   ...prevState,
+      //   series: formattedSeries,
+      // }));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  // Hàm tính trung bình
+  const average = (data: number[]) =>
+    data.length ? data.reduce((sum, val) => sum + val, 0) / data.length : 0;
+
+  // Hàm xác định nhà mạng dựa trên ISP
+  const getProvider = (isp: string) => {
+    if (isp.includes('Viettel')) return 'Viettel';
+    if (isp.includes('VNPT')) return 'VNPT';
+    if (isp.includes('FPT')) return 'FPT';
+    return 'Unknown';
+  };
 
   const handleSelectRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const regionCode = event.target.value;
@@ -69,9 +114,9 @@ function GeoChart() {
       regionCode,
     }));
   };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-12">
@@ -99,21 +144,20 @@ function GeoChart() {
             </option>
           ))}
         </select>
+        {/* <select
+          onChange={handleSelectDate}
+          className="relative z-20 mb-2 inline-flex bg-transparent py-1 pl-3 pr-2 text-sm font-medium outline-none"
+        >
+          <option value="">All Dates</option>
+          {availableDates.map((date) => (
+            <option key={date} value={date} className="dark:bg-boxdark">
+              {date}
+            </option>
+          ))}
+        </select> */}
       </div>
 
       <Chart
-        // chartEvents={[
-        //   {
-        //     eventName: 'select',
-        //     callback: ({ chartWrapper }) => {
-        //       const chart = chartWrapper.getChart();
-        //       const selection = chart.getSelection();
-        //       if (selection.length === 0) return;
-        //       const region = chartData[selection[0].row + 1];
-        //       console.log('Selected : ' + region);
-        //     },
-        //   },
-        // ]}
         chartType="GeoChart"
         width="100%"
         height="860px"
