@@ -4,7 +4,6 @@ import { ChartGeoState } from '../../interfaces/GeoChart';
 import { dataViettel } from '../../data/GeoChart';
 import { dataVNPT } from '../../data/GeoChart';
 import { dataFPT } from '../../data/GeoChart';
-import { GeoArea } from '../../data/GeoChart';
 
 const initialOptions = {
   colorAxis: { colors: ['#fde6eb', '#ee0434', '#a70324'] },
@@ -30,11 +29,9 @@ function GeoChart() {
       { name: 'VNPT', data: [] },
       { name: 'FPT', data: [] },
     ],
-    // name: [],
     regionCode: '035', // Mặc định là Đông Nam Á
     // selectedDate: '', // Ngày được chọn
   });
-  // const [availableDates, setAvailableDates] = useState<string[]>([]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const provider = event.target.value;
@@ -83,12 +80,6 @@ function GeoChart() {
         VNPT: average(groupedData[date].VNPT),
         FPT: average(groupedData[date].FPT),
       }));
-
-      // Cập nhật state
-      // setState((prevState) => ({
-      //   ...prevState,
-      //   series: formattedSeries,
-      // }));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -106,14 +97,6 @@ function GeoChart() {
     return 'Unknown';
   };
 
-  const handleSelectRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const regionCode = event.target.value;
-    // Cập nhật khu vực hiển thị trên bản đồ
-    setState((prevState) => ({
-      ...prevState,
-      regionCode,
-    }));
-  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -134,27 +117,6 @@ function GeoChart() {
             </option>
           ))}
         </select>
-        <select
-          onChange={handleSelectRegion}
-          className="relative z-20 mb-2  gap-10 inline-flex  bg-transparent py-1 pl-2 pr-3 text-sm font-medium outline-none"
-        >
-          {GeoArea.map((geo) => (
-            <option key={geo[1]} value={geo[1]} className="dark:bg-boxdark">
-              {geo[0]}
-            </option>
-          ))}
-        </select>
-        {/* <select
-          onChange={handleSelectDate}
-          className="relative z-20 mb-2 inline-flex bg-transparent py-1 pl-3 pr-2 text-sm font-medium outline-none"
-        >
-          <option value="">All Dates</option>
-          {availableDates.map((date) => (
-            <option key={date} value={date} className="dark:bg-boxdark">
-              {date}
-            </option>
-          ))}
-        </select> */}
       </div>
 
       <Chart
@@ -164,7 +126,6 @@ function GeoChart() {
         data={chartData}
         options={{
           ...chartOptions,
-          region: state.regionCode, // Cập nhật region dựa trên chọn vùng
         }}
       />
     </div>

@@ -1,4 +1,4 @@
-// interfaces/ChartFour.ts
+
 export interface ChartFourState {
   series: Array<{
     name: string;

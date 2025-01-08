@@ -2,23 +2,28 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ChartOneOptions } from '../../Config/ChartOne';
 import { ChartOneState } from '../../interfaces/ChartOne';
-
+const targetValuse =
+  '/api/macros/s/AKfycbyJNZUI16pifBqe2x06Q8QzejNUc1OAfV_GbfM_hdW0JCGgDCZorT9Y_FYawD54GWXv/exec';
+const api =
+  'https://script.googleusercontent.com/macros/echo?user_content_key=Gq4zxM2m1bHZpDBLMPl78CuBlLQydb8xSeykD-YRnpCKaFdQDk4xY76LVifhea87XyjhKgTdO8sNTUtFDzfceM3GMQ_iRkGPm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnG230CwtfZfWTz5Zvhu9TNpfBeF22W99kkGDkAF3xJIYARpkwoTcX8zVDfjKQl09TzczPej9P427FIQOaY27ANYaIUydGYw9-Q&lib=MOasducim78ekZtbISNLq8iZ9_ecy5sDx';
 const ChartOne: React.FC = () => {
   const [state, setState] = useState<ChartOneState>({
     series: [
       {
         name: 'Viettel',
-        data: [], //23, 23, 23, 24, 24, 24, 24, 25, 25, 25, 26, 27
+        data: [], 
       },
-      { name: 'VNPT', data: [] }, //30, 30, 31, 31, 31, 32, 32, 34, 34, 35, 36, 37
-      { name: 'FPT', data: [] }, //10, 10, 11, 13, 20, 30, 40, 45, 46, 20, 20, 21
+      { name: 'VNPT', data: [] }, 
+      { name: 'FPT', data: [] }, 
     ],
   });
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3000/test/latencyhour');
+      // const res = await fetch('http://localhost:3000/test/latencyhour');
+      const res = await fetch(targetValuse, { mode: 'no-cors' });
       const result = await res.json();
+      console.log(result);
 
       if (Array.isArray(result)) {
         const updatedSeries = state.series.map((item) => {

@@ -44,11 +44,7 @@ export const ChartFiveOption: ApexOptions = {
 
   xaxis: {
     tickAmount: 10,
-    labels: {
-      formatter: function (val) {
-        return parseFloat(val).toFixed(1);
-      },
-    },
+    categories: Array.from({ length: 24 }, (_, i) => `${i}:00`),
     title: {
       text: 'Hour of the Day',
     },

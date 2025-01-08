@@ -5,16 +5,16 @@ export const processLatencyData = (data: LatencyData[]): ChartSeries[] => {
   const vnptData: number[][] = [];
   const fptData: number[][] = [];
 
-  let viettelCount = 1;
-  let vnptCount = 1;
-  let fptCount = 1;
+  let viettelCount = 0;
+  let vnptCount = 0;
+  let fptCount = 0;
 
   data.forEach(({ avg_latency, local_isp }) => {
-    if (local_isp.toLowerCase().includes('viettel') && viettelCount <= 20) {
+    if (local_isp.toLowerCase().includes('viettel') && viettelCount <= 23) {
       viettelData.push([viettelCount++, avg_latency]);
-    } else if (local_isp.toLowerCase().includes('vnpt') && vnptCount <= 20) {
+    } else if (local_isp.toLowerCase().includes('vnpt') && vnptCount <= 23) {
       vnptData.push([vnptCount++, avg_latency]);
-    } else if (local_isp.toLowerCase().includes('fpt') && fptCount <= 20) {
+    } else if (local_isp.toLowerCase().includes('fpt') && fptCount <= 23) {
       fptData.push([fptCount++, avg_latency]);
     }
   });

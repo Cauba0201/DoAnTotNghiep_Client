@@ -10,6 +10,7 @@ const ChartFive: React.FC = () => {
   const [series, setSeries] = useState<ChartSeries[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [timeframe, setTimeframe] = useState<'thisDay' | 'lastDay'>('thisDay');
 
   useEffect(() => {
     const loadData = async () => {
@@ -25,6 +26,10 @@ const ChartFive: React.FC = () => {
     };
     loadData();
   }, []);
+  const handleTimeframeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as 'thisDay' | 'lastDay';
+    setTimeframe(value);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -47,13 +52,15 @@ const ChartFive: React.FC = () => {
             <select
               name="timeframe"
               id="timeframe"
+              value={timeframe}
+              onChange={handleTimeframeChange}
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="thisWeek" className="dark:bg-boxdark">
-                This Week
+              <option value="thisDay" className="dark:bg-boxdark">
+                This Day
               </option>
-              <option value="lastWeek" className="dark:bg-boxdark">
-                Last Week
+              <option value="lastDay" className="dark:bg-boxdark">
+                Last Day
               </option>
             </select>
           </div>
