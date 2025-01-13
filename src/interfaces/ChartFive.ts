@@ -1,9 +1,3 @@
-// export interface ChartFiveState {
-//   series: {
-//     name: string;
-//     data: number[][];
-//   }[];
-// }
 
 export interface LatencyData {
   avg_latency: number;

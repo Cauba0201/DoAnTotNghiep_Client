@@ -2,63 +2,62 @@ import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ChartOneOptions } from '../../Config/ChartOne';
 import { ChartOneState } from '../../interfaces/ChartOne';
-const targetValuse =
-  '/api/macros/s/AKfycbyJNZUI16pifBqe2x06Q8QzejNUc1OAfV_GbfM_hdW0JCGgDCZorT9Y_FYawD54GWXv/exec';
-const api =
-  'https://script.googleusercontent.com/macros/echo?user_content_key=Gq4zxM2m1bHZpDBLMPl78CuBlLQydb8xSeykD-YRnpCKaFdQDk4xY76LVifhea87XyjhKgTdO8sNTUtFDzfceM3GMQ_iRkGPm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnG230CwtfZfWTz5Zvhu9TNpfBeF22W99kkGDkAF3xJIYARpkwoTcX8zVDfjKQl09TzczPej9P427FIQOaY27ANYaIUydGYw9-Q&lib=MOasducim78ekZtbISNLq8iZ9_ecy5sDx';
+
 const ChartOne: React.FC = () => {
   const [state, setState] = useState<ChartOneState>({
     series: [
       {
         name: 'Viettel',
-        data: [], 
+        data: [293.4,10.3,41.1,2.3,131.1,46,4.4,67,1.3,11.9],
       },
-      { name: 'VNPT', data: [] }, 
-      { name: 'FPT', data: [] }, 
+      { name: 'VNPT', data: [701,2.6,1.8,0.9,116.1,0,4.5,0.7,357.3,9.2] },
+      { name: 'FPT', data: [709.9,0.7,7.9,1.3,1000,4.6,4.5,8.5,773.4,13.2] },
     ],
   });
 
-  const fetchData = async () => {
-    try {
-      // const res = await fetch('http://localhost:3000/test/latencyhour');
-      const res = await fetch(targetValuse, { mode: 'no-cors' });
-      const result = await res.json();
-      console.log(result);
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       'https://script.google.com/macros/s/AKfycbx3rLykakOhSt-aHLqET1738Nys3wi9QxQ-P8d4kUrzJKAKFOYUzqqdc--5jMttT1MH/exec',
+  //     );
 
-      if (Array.isArray(result)) {
-        const updatedSeries = state.series.map((item) => {
-          const ispData = result.filter(
-            (entry) =>
-              entry.local_isp &&
-              entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
-          );
+  //     const result = await res.json();
+  //     // console.log(result);
 
-          const latencyNumbers = ispData.map((entry) =>
-            parseFloat(entry.avg_latency),
-          );
+  //     if (Array.isArray(result)) {
+  //       const updatedSeries = state.series.map((item) => {
+  //         const ispData = result.filter(
+  //           (entry) =>
+  //             entry.local_isp &&
+  //             entry.local_isp.toLowerCase().includes(item.name.toLowerCase()),
+  //         );
 
-          return {
-            ...item,
-            data: latencyNumbers,
-          };
-        });
+  //         const latencyNumbers = ispData.map((entry) =>
+  //           parseFloat(entry.avg_latency),
+  //         );
 
-        setState({ series: updatedSeries });
-      }
-      return result;
-    } catch (error) {
-      console.error('Failed to fetch data:', error);
-    }
-  };
+  //         return {
+  //           ...item,
+  //           data: latencyNumbers,
+  //         };
+  //       });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  //       setState({ series: updatedSeries });
+  //     }
+  //     return result;
+  //   } catch (error) {
+  //     console.error('Failed to fetch data:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
       <h5 className="text-xl mb-3 font-semibold text-black dark:text-white">
-        Evaluate Performance By Peak And Off-Peak Hours
+        Độ ổn định mạng lưới theo các ISP
       </h5>
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
@@ -78,9 +77,9 @@ const ChartOne: React.FC = () => {
                   className="font-semibold"
                   style={{ color: ChartOneOptions.colors?.[index] }}
                 >
-                  Latency {name}
+                  Jitter {name}
                 </p>
-                <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                <p className="text-sm font-medium"></p>
               </div>
             </div>
           ))}

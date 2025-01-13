@@ -8,7 +8,8 @@ import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
 
 // Constants
-const API_URL = 'http://localhost:3000/test/packetloss';
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbx3rLykakOhSt-aHLqET1738Nys3wi9QxQ-P8d4kUrzJKAKFOYUzqqdc--5jMttT1MH/exec';
 const ISPS = {
   VIETTEL: 'VIETTEL-VN',
   VNPT: 'VNPT-VN',
