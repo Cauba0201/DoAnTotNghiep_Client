@@ -1,38 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { ChartThreeState } from '../../interfaces/ChartThree';
 import { ChartThreeOptions } from '../../Config/ChartThree';
 
 const initialState: ChartThreeState = {
-  series: [2, 5, 10, 11],
-  colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'],
+  series: [5.6, 0.6, 5.3, 5.2, 5.2, 0.2, 5, 43.2, 3.3, 4.9, 4.9, 5, 5, 4.8, 1],
+  colors: [
+    '#c0392b',
+    '#e74c3c',
+    '#9b59b6',
+    '#8e44ad',
+    '#2980b9',
+    '#3498db',
+    '#1abc9c',
+    '#16a085',
+    '#27ae60',
+    '#2ecc71',
+    '#f1c40f',
+    '#f39c12',
+    '#e67e22',
+    '#d35400',
+    '#7f8c8d',
+    '#34495e',
+  ],
 };
 
 const ChartThree: React.FC = () => {
   const [state, setState] = useState<ChartThreeState>(initialState);
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch('http://localhost:3000/toplatency');
-      const data = await res.json();
-      if (data?.avg_latency)
-        setState((prevState) => ({ ...prevState, series: data.avg_latency }));
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await fetch('http://localhost:3000/toplatency');
+  //     const data = await res.json();
+  //     if (data?.avg_latency)
+  //       setState((prevState) => ({ ...prevState, series: data.avg_latency }));
+  //     return data;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-    console.log(fetchData());
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  //   console.log(fetchData());
+  // }, []);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const providerSettings: Record<string, ChartThreeState> = {
       Viettel: {
-        series: [2, 5, 10, 11],
-        colors: ['#8B0000', '#F08080', '#FFA07A', '#FF0000'],
+        series: [
+          5.6, 0.6, 5.3, 5.2, 5.2, 0.2, 5, 43.2, 3.3, 4.9, 4.9, 5, 5, 4.8, 1,
+        ],
+        colors: [
+          '#c0392b',
+          '#e74c3c',
+          '#9b59b6',
+          '#8e44ad',
+          '#2980b9',
+          '#3498db',
+          '#1abc9c',
+          '#16a085',
+          '#27ae60',
+          '#2ecc71',
+          '#f1c40f',
+          '#f39c12',
+          '#e67e22',
+          '#d35400',
+          '#7f8c8d',
+          '#34495e',
+        ],
       },
       VNPT: {
         series: [1, 10, 11, 15],
@@ -47,11 +83,11 @@ const ChartThree: React.FC = () => {
   };
 
   return (
-    <div className="sm:px-7.5 col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-5">
-      <div className="mb-3 flex justify-between gap-4 sm:flex">
-        <h5 className="text-xl font-semibold text-black dark:text-white">
-          Packet Loss Analytics
-        </h5>
+    <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-6">
+      <div className="mb-4 flex justify-between gap-4 sm:flex">
+        <h4 className="text-xl font-semibold text-black dark:text-white">
+          Phần trăm các ISP được sử dụng
+        </h4>
         <select
           onChange={handleSelectChange}
           className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
@@ -69,6 +105,7 @@ const ChartThree: React.FC = () => {
           options={{ ...ChartThreeOptions, colors: state.colors }}
           series={state.series}
           type="donut"
+          height={350}
         />
       </div>
 

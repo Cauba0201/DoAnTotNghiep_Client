@@ -1,7 +1,7 @@
 
 export interface ChartTwoSeries {
   name: string;
-  data: { x: string; y: number }[];
+  data: number[];
 }
 
 export interface ChartTwoState {

@@ -5,7 +5,7 @@ export const ChartTwoOption: ApexOptions = {
   chart: {
     fontFamily: 'Satoshi, sans-serif',
     type: 'bar',
-    height: 335,
+    height: 350,
     // stacked: true, // không chồng nên nhau
     toolbar: {
       show: false,
@@ -32,7 +32,7 @@ export const ChartTwoOption: ApexOptions = {
     bar: {
       horizontal: false,
       borderRadius: 0,
-      columnWidth: '90%',
+      columnWidth: '100%',
       borderRadiusApplication: 'end',
       borderRadiusWhenStacked: 'last',
       dataLabels: {
@@ -41,21 +41,21 @@ export const ChartTwoOption: ApexOptions = {
     },
   },
   dataLabels: {
-    enabled: true,
+    enabled: false,
   },
 
-  // xaxis: {
-  //   categories: getDaysInMonthWithWeekdays(2024, 11),
-  //   title: {
-  //     text: 'Time (Day)',
-  //   },
-  // },
+  xaxis: {
+    categories: [],
+    // title: {
+    //   text: 'Time (Day)',
+    // },
+  },
   yaxis: {
     title: {
       text: 'Packet Loss Rate (%)',
     },
     min: 0,
-    max: 200,
+    max: 100,
   },
   stroke: {
     show: true,
@@ -70,14 +70,13 @@ export const ChartTwoOption: ApexOptions = {
     position: 'top',
     horizontalAlign: 'left',
     fontFamily: 'Satoshi',
-    fontWeight: 500,
+    fontWeight: 600,
     fontSize: '14px',
   },
   fill: {
     opacity: 1,
   },
 };
-
 
 // const getDaysInMonthWithWeekdays = (year: number, month: number): string[] => {
 //   const days = new Date(year, month, 0).getDate(); // Lấy số ngày trong tháng

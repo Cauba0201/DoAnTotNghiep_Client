@@ -10,14 +10,21 @@ const ChartFour: React.FC = () => {
     series: [
       {
         name: 'Viettel',
-        data: [],
+        data: [4, 34, 4, 5, 4, 2, 4, 354, 6],
       },
       { name: 'VNPT', data: [] },
       { name: 'FPT', data: [] },
     ],
   });
 
-  const latencyService = new LatencyService('http://localhost:3000/test/latency');
+  const api =
+    'https://script.google.com/macros/s/AKfycbx3rLykakOhSt-aHLqET1738Nys3wi9QxQ-P8d4kUrzJKAKFOYUzqqdc--5jMttT1MH/exec';
+
+  const latencyService = new LatencyService(
+    'http://localhost:3000/test/latency',
+  );
+  // const latencyService = new LatencyService(api);
+  // console.log(latencyService)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +50,7 @@ const ChartFour: React.FC = () => {
       <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-12">
         <div className="mb-5">
           <h4 className="text-xl font-semibold text-black dark:text-white">
-            Trend of Latency Over Time
+            Xu hướng độ trễ theo thời gian
           </h4>
         </div>
         <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
